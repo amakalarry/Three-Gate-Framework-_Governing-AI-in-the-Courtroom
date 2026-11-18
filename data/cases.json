@@ -1,0 +1,1273 @@
+{
+  "cases": [
+    {
+      "id": "puloka",
+      "name": "State v. Puloka",
+      "year": 2024,
+      "jurisdiction": "Washington (Frye)",
+      "evidenceType": "AI-enhanced video",
+      "icon": "video",
+      "theme": "red",
+      "outcome": {
+        "label": "Excluded",
+        "icon": "ban",
+        "theme": "red"
+      },
+      "summary": "Failed all three gates: no model card or forensic-community validation (G1), no domain-specific error rate and unexplained training data (G2), no provenance record documenting enhancement transformations (G3). Topaz Video AI added 16× as many pixels as the original. Court found the technique novel, opaque, and likely to cause confusion.",
+      "gates": {
+        "g1": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_met",
+              "why": "Topaz Labs published no model card covering intended use, subgroup performance, or limitations for forensic enhancement."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_met",
+              "why": "The training data behind Topaz Video AI’s models was unknown to the expert who ran the enhancement."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "not_met",
+              "why": "Tool named only as “Topaz Video AI” by a video editor; no build number or configuration parameters were recorded."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_met",
+              "why": "No validation by the forensic video community — forensic analysts did not recognise the technique."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_met",
+              "why": "Proprietary algorithms; no source-code access was offered or available."
+            }
+          ]
+        },
+        "g2": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_met",
+              "why": "Low-resolution, compressed phone footage fell outside any validated input domain."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_met",
+              "why": "No error rate was offered for this input domain or task."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_met",
+              "why": "No version-specific validation — and the tool added roughly 16× the original pixels with no measure of fidelity."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_met",
+              "why": "No explainability output separating inferred pixels from recorded ones."
+            }
+          ]
+        },
+        "g3": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Provenance record",
+              "status": "not_met",
+              "why": "No provenance record documented the transformations between the source clip and the enhanced exhibit."
+            },
+            {
+              "requirement": "Cryptographic integrity",
+              "status": "not_met",
+              "why": "No hash chain linked the original recording to the enhanced output."
+            },
+            {
+              "requirement": "Non-deterministic parameter logging",
+              "status": "not_met",
+              "why": "Enhancement settings and model parameters were not logged."
+            },
+            {
+              "requirement": "Reproducibility pathway",
+              "status": "not_met",
+              "why": "The enhancement could not be reproduced by an independent examiner."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pickett",
+      "name": "State v. Pickett",
+      "year": 2021,
+      "jurisdiction": "New Jersey (Frye)",
+      "evidenceType": "Probabilistic genotyping",
+      "icon": "dna",
+      "theme": "amber",
+      "outcome": {
+        "label": "Discovery ordered",
+        "icon": "fsearch",
+        "theme": "blue"
+      },
+      "summary": "Gate 1 failure: insufficient disclosure of TrueAllele source code. Court held “without scrutinizing source code in an adversarial system, no finding of reliability could realistically be made.” Validation studies existed but were vendor-conducted.",
+      "gates": {
+        "g1": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_met",
+              "why": "TrueAllele’s limitations were not disclosed in a form the defense could test."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "partial",
+              "why": "Validation datasets were described in vendor publications but not produced for independent review."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "met",
+              "why": "TrueAllele was identified as the tool used for the mixture interpretation."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_met",
+              "why": "Validation studies existed but were largely vendor-conducted or vendor-affiliated."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_met",
+              "why": "Source code was withheld until the court ordered disclosure under a protective order."
+            }
+          ]
+        },
+        "g2": {
+          "result": "partial",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "partial",
+              "why": "A complex, low-template mixture pushed the limits of the published validation."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "partial",
+              "why": "Error rates were published for mixtures generally, not for this mixture profile."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_met",
+              "why": "No showing that validation covered the specific software version used."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "partial",
+              "why": "A likelihood ratio was reported, but how it was reached could not be examined without the code."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not reached: the dispute centred on disclosure, and the chain of custody of the DNA data was not challenged."
+        }
+      }
+    },
+    {
+      "id": "arteaga",
+      "name": "State v. Arteaga",
+      "year": 2023,
+      "jurisdiction": "New Jersey (Frye)",
+      "evidenceType": "Facial recognition",
+      "icon": "face",
+      "theme": "coral",
+      "outcome": {
+        "label": "Discovery ordered",
+        "icon": "fsearch",
+        "theme": "blue"
+      },
+      "summary": "Gate 1 and 2 failures: state had not disclosed FRT system details, probe image quality, candidate list, or error rates. Court grounded its order in Brady obligations and the right to impeach the investigation.",
+      "gates": {
+        "g1": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_met",
+              "why": "The State did not disclose the FRT system’s design, performance metrics, or limitations."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_met",
+              "why": "No information about the gallery database or training data was provided."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "not_met",
+              "why": "The system and version that generated the match were not identified."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_met",
+              "why": "No validation results were provided to the defense."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "na",
+              "why": "Not sought — the order targeted system details, error rates, and the candidate list."
+            }
+          ]
+        },
+        "g2": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_met",
+              "why": "Probe-image quality was undisclosed, so fit with a validated domain could not be assessed."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_met",
+              "why": "No error rates were disclosed."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_met",
+              "why": "No version-specific validation was offered."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_met",
+              "why": "The candidate list and any analyst edits to the probe image were withheld."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not reached: the court resolved the matter as a Brady discovery order before any provenance question arose."
+        }
+      }
+    },
+    {
+      "id": "miles",
+      "name": "State v. Miles",
+      "year": 2026,
+      "jurisdiction": "New Jersey Supreme Court",
+      "evidenceType": "Facial recognition",
+      "icon": "face",
+      "theme": "blue",
+      "outcome": {
+        "label": "Partial discovery",
+        "icon": "fsearch",
+        "theme": "amber"
+      },
+      "summary": "Court affirmed minimum disclosure obligations but reversed source-code order without particularized need showing. Consistent with the framework’s proportionality principle.",
+      "gates": {
+        "g1": {
+          "result": "partial",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "partial",
+              "why": "Court required disclosure of basic system documentation and performance information."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "partial",
+              "why": "Gallery database information was required only at a general level."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "met",
+              "why": "Minimum disclosure obligations included identifying the FRT system used."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "partial",
+              "why": "Error-rate and testing information was required, but independent validation was not mandated."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_met",
+              "why": "Source-code order reversed absent a particularized showing of need — consistent with proportionality."
+            }
+          ]
+        },
+        "g2": {
+          "result": "partial",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "partial",
+              "why": "Probe-image characteristics were disclosed, but domain fit was not ruled on."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "partial",
+              "why": "Available error rates were ordered disclosed; no domain-specific rate was required."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_examined",
+              "why": "Version-specific validation was not addressed."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_examined",
+              "why": "Explainability output was not addressed."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not reached: the ruling concerned pre-trial discovery, not admission of an FRT artifact."
+        }
+      }
+    },
+    {
+      "id": "mendones",
+      "name": "Mendones v. Cushman & Wakefield",
+      "year": 2025,
+      "jurisdiction": "California",
+      "evidenceType": "Deepfake exhibits",
+      "icon": "photo",
+      "theme": "purple",
+      "outcome": {
+        "label": "Case dismissed",
+        "icon": "ban",
+        "theme": "red"
+      },
+      "summary": "Gate 3 failure: deepfake exhibits detected through metadata inconsistencies (iPhone 6 provenance claims for footage the device couldn’t produce). A provenance requirement would have caught fabrication before submission.",
+      "gates": {
+        "g1": {
+          "result": "na",
+          "note": "Not reached: the exhibits were presented as ordinary recordings, so no AI tool was ever disclosed."
+        },
+        "g2": {
+          "result": "na",
+          "note": "Not reached: with no disclosed AI tool, there was no application whose reliability could be tested."
+        },
+        "g3": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Provenance record",
+              "status": "not_met",
+              "why": "No provenance record; the claimed iPhone 6 origin was contradicted by the files’ own metadata."
+            },
+            {
+              "requirement": "Cryptographic integrity",
+              "status": "not_met",
+              "why": "No hash linked the exhibits to an original capture device."
+            },
+            {
+              "requirement": "Non-deterministic parameter logging",
+              "status": "not_met",
+              "why": "Generation parameters were never logged because the AI origin was concealed."
+            },
+            {
+              "requirement": "Reproducibility pathway",
+              "status": "not_met",
+              "why": "The exhibits could not be traced to, or reproduced from, a genuine original recording."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "usvwilliams",
+      "name": "United States v. Williams",
+      "year": 2023,
+      "jurisdiction": "5th Circuit (Daubert)",
+      "evidenceType": "Mobile extraction",
+      "icon": "phone",
+      "theme": "teal",
+      "outcome": {
+        "label": "Admitted (no scrutiny)",
+        "icon": "alert",
+        "theme": "purple"
+      },
+      "summary": "No gates applied. Investigator “disavowed any particular knowledge of [Cellebrite’s] technology.” Under the framework, interpretive functions within extraction suites would trigger Gates 1 and 2.",
+      "gates": {
+        "g1": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_examined",
+              "why": "No documentation of Cellebrite’s analytic features was requested or offered."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_examined",
+              "why": "No information on data used to build the tool’s parsing or categorisation features."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "not_examined",
+              "why": "Extraction version and settings were not established by the testifying investigator."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_examined",
+              "why": "No validation evidence offered; the investigator disavowed knowledge of the technology."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_examined",
+              "why": "Source code was not sought."
+            }
+          ]
+        },
+        "g2": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_examined",
+              "why": "No inquiry into whether the device and OS were supported by the extraction version."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_examined",
+              "why": "No error rate for the tool’s parsing or categorisation functions."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_examined",
+              "why": "Version-specific results were not examined."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_examined",
+              "why": "The investigator could not explain how the tool produced its reports."
+            }
+          ]
+        },
+        "g3": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Provenance record",
+              "status": "not_examined",
+              "why": "The extraction report was admitted without a machine-readable transformation log."
+            },
+            {
+              "requirement": "Cryptographic integrity",
+              "status": "not_examined",
+              "why": "Hash verification of the extraction was never put at issue."
+            },
+            {
+              "requirement": "Non-deterministic parameter logging",
+              "status": "na",
+              "why": "Not applicable — physical extraction is deterministic."
+            },
+            {
+              "requirement": "Reproducibility pathway",
+              "status": "not_examined",
+              "why": "No showing that an independent examiner could reproduce the report."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "loomis",
+      "name": "State v. Loomis",
+      "year": 2016,
+      "jurisdiction": "Wisconsin",
+      "evidenceType": "COMPAS risk assessment",
+      "icon": "cpu",
+      "theme": "amber",
+      "outcome": {
+        "label": "Admitted with warnings",
+        "icon": "alert",
+        "theme": "amber"
+      },
+      "summary": "Court accepted proprietary COMPAS risk score at sentencing with warnings about proprietary nature and possible racial disparities, but did not require validation data or error rates. Under the framework, the interpretive scoring function would trigger all three gates.",
+      "gates": {
+        "g1": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_examined",
+              "why": "Score accepted without documentation of COMPAS’s intended use or subgroup performance."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_examined",
+              "why": "The norming population and training data were not disclosed."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "not_examined",
+              "why": "The COMPAS version and configuration used were not examined."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_examined",
+              "why": "No independent validation for the Wisconsin population was required."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_examined",
+              "why": "Trade-secret protection meant the defendant could not examine the methodology."
+            }
+          ]
+        },
+        "g2": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_examined",
+              "why": "No showing that COMPAS was validated for this population or for sentencing use."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_examined",
+              "why": "No error rate required — the court only warned about possible racial disparities."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_examined",
+              "why": "Version-specific results were not examined."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_examined",
+              "why": "The score was delivered without any explanation of the factors driving it."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not reached: the integrity of the score’s computation was never placed in issue."
+        }
+      }
+    },
+    {
+      "id": "huang",
+      "name": "Huang v. Tesla",
+      "year": 2023,
+      "jurisdiction": "Cal. Superior Ct.",
+      "evidenceType": "Deepfake defense (liar’s dividend)",
+      "icon": "video",
+      "theme": "coral",
+      "outcome": {
+        "label": "Defense rejected",
+        "icon": "x",
+        "theme": "red"
+      },
+      "summary": "Tesla claimed Musk videos might be deepfakes to avoid authentication. Judge found it “deeply troubling” and ordered Musk to testify under oath. Canonical rejection of the “liar’s dividend.” Provenance documentation would have resolved authentication immediately.",
+      "gates": {
+        "g1": {
+          "result": "na",
+          "note": "Not reached: no AI tool was offered — Tesla only speculated that the videos might be deepfakes."
+        },
+        "g2": {
+          "result": "na",
+          "note": "Not reached: the question was authenticity of recordings, not reliability of an AI system."
+        },
+        "g3": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Provenance record",
+              "status": "not_met",
+              "why": "No provenance record existed for the recordings, leaving room for the deepfake claim."
+            },
+            {
+              "requirement": "Cryptographic integrity",
+              "status": "not_met",
+              "why": "No hash chain connected the original recordings to the copies in circulation."
+            },
+            {
+              "requirement": "Non-deterministic parameter logging",
+              "status": "na",
+              "why": "Not applicable — the recordings were not produced by a generative process."
+            },
+            {
+              "requirement": "Reproducibility pathway",
+              "status": "not_met",
+              "why": "Authenticity could be resolved only by ordering Musk to testify under oath."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "kohls",
+      "name": "Kohls v. Ellison",
+      "year": 2025,
+      "jurisdiction": "D. Minn.",
+      "evidenceType": "AI-generated expert testimony",
+      "icon": "brain",
+      "theme": "red",
+      "outcome": {
+        "label": "Expert excluded",
+        "icon": "ban",
+        "theme": "red"
+      },
+      "summary": "Stanford AI expert’s declaration excluded after ChatGPT-generated fabricated citations discovered. Judge called it “ironic” that an AI misinformation expert fell victim to AI hallucinations. Failed Gate 1 (no verification) and Gate 2 (hallucinated sources destroyed reliability).",
+      "gates": {
+        "g1": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_met",
+              "why": "ChatGPT use in drafting the declaration was not disclosed, so no model documentation was before the court."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_met",
+              "why": "No training-data information — the model’s involvement was itself undisclosed."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "not_met",
+              "why": "The tool was identified only after the fabricated citations were exposed; no version or prompts were recorded."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_met",
+              "why": "No validation: AI-drafted text was never checked against the sources it cited."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "na",
+              "why": "Not at issue — the failure was undisclosed use, not a need to inspect the model."
+            }
+          ]
+        },
+        "g2": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_met",
+              "why": "Generating scholarly citations is a known LLM failure domain; output was used outside any validated task."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_met",
+              "why": "No error rate for hallucinated citations was considered or disclosed."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_met",
+              "why": "Hallucinated citations to non-existent articles appeared in the sworn declaration."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_met",
+              "why": "The expert could not explain how the AI produced the fabricated references."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not applicable: the declaration was excluded at Gates 1–2, and no AI-generated artifact was offered as evidence."
+        }
+      }
+    },
+    {
+      "id": "weber",
+      "name": "Matter of Weber",
+      "year": 2024,
+      "jurisdiction": "N.Y. Sur.",
+      "evidenceType": "AI-assisted expert valuation",
+      "icon": "chart",
+      "theme": "amber",
+      "outcome": {
+        "label": "Expert excluded",
+        "icon": "ban",
+        "theme": "red"
+      },
+      "summary": "Court excluded expert’s valuation as unreliable and speculative, noting reliance on generative AI. First published decision announcing an AI-disclosure duty for counsel.",
+      "gates": {
+        "g1": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_met",
+              "why": "The expert relied on Microsoft Copilot with no model documentation."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_met",
+              "why": "No training-data information was offered."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "partial",
+              "why": "Copilot was named, but the expert could not say what prompts or inputs were used."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_met",
+              "why": "No validation of the AI-assisted calculations was offered."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "na",
+              "why": "Not at issue."
+            }
+          ]
+        },
+        "g2": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_met",
+              "why": "Financial valuation is outside any validated task for a general-purpose chatbot."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_met",
+              "why": "No error rate — and the court’s own Copilot queries returned differing figures."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_met",
+              "why": "Outputs could not be tied to a specific, validated run."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_met",
+              "why": "The expert could not explain how Copilot reached its figures."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not reached: the valuation was excluded at Gates 1–2, and no AI-generated exhibit was offered."
+        }
+      }
+    },
+    {
+      "id": "ferlito",
+      "name": "Ferlito v. Harbor Freight",
+      "year": 2025,
+      "jurisdiction": "E.D.N.Y.",
+      "evidenceType": "LLM-verified expert",
+      "icon": "shield",
+      "theme": "green",
+      "outcome": {
+        "label": "Expert admitted",
+        "icon": "check-c",
+        "theme": "green"
+      },
+      "summary": "Court refused to exclude expert who used an LLM to double-check findings. Demonstrates that responsible, verified AI use by experts survives scrutiny — the AI was a check, not the source of the opinion.",
+      "gates": {
+        "g1": {
+          "result": "pass",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "na",
+              "why": "Not required: the LLM served as a verification check, not the analytical source of the opinion."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "na",
+              "why": "Not material: the opinion did not rest on the LLM’s training data."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "met",
+              "why": "The expert disclosed using an LLM to double-check his findings."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "met",
+              "why": "AI served as a verification check — the conclusions came from the expert’s own methodology."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "na",
+              "why": "Not sought or required given the LLM’s limited role."
+            }
+          ]
+        },
+        "g2": {
+          "result": "pass",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "met",
+              "why": "The expert’s underlying methodology was independently reliable."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "na",
+              "why": "No error rate needed: the LLM did not generate the opinion."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "na",
+              "why": "Not required for a confirmatory check."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "met",
+              "why": "The LLM did not alter the substance of the opinion, which the expert could fully explain."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not applicable: no AI-generated artifact was offered — the expert’s own opinion was the evidence."
+        }
+      }
+    },
+    {
+      "id": "schulte",
+      "name": "Schulte v. LinkedIn",
+      "year": 2026,
+      "jurisdiction": "N.D. Cal.",
+      "evidenceType": "Generative AI document review",
+      "icon": "fsearch",
+      "theme": "green",
+      "outcome": {
+        "label": "AI review accepted",
+        "icon": "check-c",
+        "theme": "green"
+      },
+      "summary": "First federal court to accept generative AI (Relativity aiR) making final responsiveness determinations in e-discovery. Court treated it as TAR under existing proportionality principles, not novel technology requiring new rules.",
+      "gates": {
+        "g1": {
+          "result": "pass",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "met",
+              "why": "Relativity aiR’s use was disclosed under the parties’ ESI protocol."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "na",
+              "why": "Not required: performance was measured on the case’s own documents rather than through vendor training data."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "met",
+              "why": "Tool identified by name and version (Relativity aiR)."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "met",
+              "why": "The review workflow and its validation approach were documented and shared."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "na",
+              "why": "Not sought — proportionality principles for e-discovery did not call for it."
+            }
+          ]
+        },
+        "g2": {
+          "result": "pass",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "met",
+              "why": "Applied to its intended task, with the proportionality analysis under FRCP 26(b)(1) satisfied."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "met",
+              "why": "Quality-control sampling with human review measured performance for this review."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "met",
+              "why": "Validation results were tied to the review run actually performed."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "met",
+              "why": "Per-document rationales let human reviewers check each responsiveness call."
+            }
+          ]
+        },
+        "g3": {
+          "result": "pass",
+          "requirements": [
+            {
+              "requirement": "Provenance record",
+              "status": "met",
+              "why": "Documented pipeline from search terms through AI review to QC sampling."
+            },
+            {
+              "requirement": "Cryptographic integrity",
+              "status": "partial",
+              "why": "Platform audit logs tracked documents across stages; formal hash verification was not at issue."
+            },
+            {
+              "requirement": "Non-deterministic parameter logging",
+              "status": "met",
+              "why": "Review criteria and run configuration were recorded as part of the workflow."
+            },
+            {
+              "requirement": "Reproducibility pathway",
+              "status": "met",
+              "why": "The workflow was documented well enough to be re-run and audited."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "simmons",
+      "name": "Simmons v. Ferrigno",
+      "year": 2025,
+      "jurisdiction": "2d Cir.",
+      "evidenceType": "ShotSpotter acoustic detection",
+      "icon": "wave",
+      "theme": "teal",
+      "outcome": {
+        "label": "Admitted",
+        "icon": "check-c",
+        "theme": "green"
+      },
+      "summary": "Second Circuit found ShotSpotter relevant under Rule 401, authenticatable under Rule 901(a) through employee testimony, and not unfairly prejudicial. No formal validation framework required.",
+      "gates": {
+        "g1": {
+          "result": "partial",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_met",
+              "why": "No model card for ShotSpotter’s classification algorithms."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_met",
+              "why": "Acoustic training data was not documented."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "met",
+              "why": "The system was identified and explained through ShotSpotter employee testimony."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "partial",
+              "why": "The court accepted employee testimony on accuracy without independent validation."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_examined",
+              "why": "Source code was not sought."
+            }
+          ]
+        },
+        "g2": {
+          "result": "partial",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "partial",
+              "why": "Alert conditions were described but not tested against validated conditions."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "partial",
+              "why": "Vendor accuracy figures were offered; no domain-specific error rate."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_examined",
+              "why": "Version-specific results were not examined."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "partial",
+              "why": "An employee explained the alert and its human review in testimony."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not reached: authentication under Rule 901(a) through employee testimony was treated as sufficient."
+        }
+      }
+    },
+    {
+      "id": "shotspotter",
+      "name": "ShotSpotter/Chicago",
+      "year": 2021,
+      "jurisdiction": "Cook County, IL",
+      "evidenceType": "Acoustic gunshot detection",
+      "icon": "wave",
+      "theme": "red",
+      "outcome": {
+        "label": "Conviction reversed",
+        "icon": "ban",
+        "theme": "red"
+      },
+      "summary": "Judge found ShotSpotter unreliable after evidence showed employees reclassified a “firecracker” alert as “gunshot” and changed the reported location by ~1 mile to match the police narrative.",
+      "gates": {
+        "g1": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_met",
+              "why": "Proprietary classification algorithms were not disclosed."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_met",
+              "why": "The classification methodology and its training data were not documented."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "not_met",
+              "why": "The sensor configuration and software version behind the alert were not specified."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_met",
+              "why": "No independent validation — reliance on vendor-funded studies."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_met",
+              "why": "Source code was withheld as a trade secret."
+            }
+          ]
+        },
+        "g2": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_met",
+              "why": "A dense urban acoustic environment was not shown to be within validated conditions."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_met",
+              "why": "No domain-specific error rate for telling gunshots from firecrackers."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_met",
+              "why": "An employee reclassified a “firecracker” alert as “gunshot”, so the output wasn’t the validated system’s result."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_met",
+              "why": "The reported location moved by about a mile with no explanation of how."
+            }
+          ]
+        },
+        "g3": {
+          "result": "fail",
+          "requirements": [
+            {
+              "requirement": "Provenance record",
+              "status": "not_met",
+              "why": "No immutable audit trail of the human edits to the alert."
+            },
+            {
+              "requirement": "Cryptographic integrity",
+              "status": "not_met",
+              "why": "No integrity checks — the altered classification replaced the original."
+            },
+            {
+              "requirement": "Non-deterministic parameter logging",
+              "status": "not_met",
+              "why": "Reclassification criteria and reviewer actions were not logged."
+            },
+            {
+              "requirement": "Reproducibility pathway",
+              "status": "not_met",
+              "why": "The reclassification was discovered only through adversarial litigation, not from the record."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "lipps",
+      "name": "Lipps wrongful detention",
+      "year": 2025,
+      "jurisdiction": "Tennessee",
+      "evidenceType": "Clearview AI misidentification",
+      "icon": "face",
+      "theme": "red",
+      "outcome": {
+        "label": "Charges dropped (5 months)",
+        "icon": "alert",
+        "theme": "purple"
+      },
+      "summary": "Angela Lipps arrested after Clearview AI facial recognition misidentified her as a fraud suspect. She spent over five months in jail before charges dropped. No gate scrutiny was applied before the arrest.",
+      "gates": {
+        "g1": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "not_examined",
+              "why": "Clearview’s documentation was not consulted before the arrest."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "not_examined",
+              "why": "The scraped image gallery behind the match was never examined."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "not_examined",
+              "why": "No record of which search or version produced the lead."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "not_examined",
+              "why": "No validation — the match was treated as an identification."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "not_examined",
+              "why": "Not sought."
+            }
+          ]
+        },
+        "g2": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "not_examined",
+              "why": "Probe-image quality was not assessed before relying on the match."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "not_examined",
+              "why": "No error rate was considered for the match."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "not_examined",
+              "why": "Version-specific results were not examined."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "not_examined",
+              "why": "No similarity score or explanation was reviewed, and no corroboration sought."
+            }
+          ]
+        },
+        "g3": {
+          "result": "none",
+          "requirements": [
+            {
+              "requirement": "Provenance record",
+              "status": "not_examined",
+              "why": "No record linked the probe image, search, and candidate selection."
+            },
+            {
+              "requirement": "Cryptographic integrity",
+              "status": "not_examined",
+              "why": "Integrity of the search output was not examined."
+            },
+            {
+              "requirement": "Non-deterministic parameter logging",
+              "status": "not_examined",
+              "why": "Search settings were not logged."
+            },
+            {
+              "requirement": "Reproducibility pathway",
+              "status": "not_examined",
+              "why": "No independent examiner reproduced the match before the arrest."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wakefield",
+      "name": "Wakefield / Gissantaner",
+      "year": 2022,
+      "jurisdiction": "NY / 6th Cir.",
+      "evidenceType": "Probabilistic genotyping (admitted)",
+      "icon": "dna",
+      "theme": "green",
+      "outcome": {
+        "label": "Admitted",
+        "icon": "check-c",
+        "theme": "green"
+      },
+      "summary": "TrueAllele (Frye) and STRmix (Daubert) respectively held admissible when properly validated. Shows probabilistic genotyping survives challenge when independent validation exists.",
+      "gates": {
+        "g1": {
+          "result": "pass",
+          "requirements": [
+            {
+              "requirement": "Model card",
+              "status": "met",
+              "why": "Developers published methodology, intended use, and limitations."
+            },
+            {
+              "requirement": "Datasheet for data",
+              "status": "met",
+              "why": "Validation datasets were described in peer-reviewed literature."
+            },
+            {
+              "requirement": "Tool identification",
+              "status": "met",
+              "why": "TrueAllele and STRmix were identified, with versions in the record."
+            },
+            {
+              "requirement": "Validation report",
+              "status": "met",
+              "why": "Independent validation, including by forensic laboratories, supported reliability."
+            },
+            {
+              "requirement": "Source code access",
+              "status": "partial",
+              "why": "Source code was not produced in Wakefield; the court found validation sufficient without it."
+            }
+          ]
+        },
+        "g2": {
+          "result": "pass",
+          "requirements": [
+            {
+              "requirement": "Domain validation",
+              "status": "met",
+              "why": "The courts found the mixtures within validated contributor and template ranges."
+            },
+            {
+              "requirement": "Error-rate specification",
+              "status": "met",
+              "why": "Published error rates and likelihood-ratio performance data were available."
+            },
+            {
+              "requirement": "Version-specific results",
+              "status": "met",
+              "why": "Validation covered the software versions used."
+            },
+            {
+              "requirement": "Explainability output",
+              "status": "partial",
+              "why": "Likelihood ratios came with supporting diagnostics, though internal reasoning stays opaque."
+            }
+          ]
+        },
+        "g3": {
+          "result": "na",
+          "note": "Not reached: the chain of custody of the DNA data and analysis was not contested."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Three-Gate Framework</title>
+<meta name="description" content="Interactive companion to “Governing AI in the Courtroom”: the three-gate framework for admitting AI-generated digital evidence, with case analyses, a jurisdiction comparison, and an assessment checklist.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#f6f4ef;--surface:#fff;--surface-alt:#f2efe8;--surface-sunk:#ece8df;
+--border:#dcd5c7;--border-lt:#e9e4da;--edge:#b4ad9e;
+--tx:#16181d;--tx2:#474c56;--tx3:#787d87;
+--accent:#1d3b72;--accent-h:#132a55;--accent-lt:#e4ebf7;
+--purple:#6438c9;--purple-bg:#f1ecfd;--purple-bd:#cdbdf5;
+--teal:#0d7560;--teal-bg:#e2f3ed;--teal-bd:#9cd6c3;
+--blue:#2159b8;--blue-bg:#e6eefb;--blue-bd:#a8c3ec;
+--coral:#c4532a;--coral-bg:#fbede6;
+--green:#17703f;--green-bg:#e4f3e9;--green-bd:#a9d9b9;
+--red:#a3292b;--red-bg:#fcefef;--red-bd:#ecb9b9;
+--amber:#93560b;--amber-bg:#fbf1dc;--amber-bd:#ecd29d;
+--serif:'Newsreader',Georgia,'Times New Roman',serif;
+--sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+--mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+--r:14px;--r-sm:9px;
+--sh-sm:0 1px 2px rgba(22,24,29,.05);
+--sh:0 1px 2px rgba(22,24,29,.04),0 2px 8px rgba(22,24,29,.05);
+--sh-md:0 2px 4px rgba(22,24,29,.04),0 8px 24px rgba(22,24,29,.08);
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-size:15px;background:var(--bg);color:var(--tx);line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
+::selection{background:var(--accent-lt)}
+.container{max-width:1200px;margin:0 auto;padding:0 28px}
+.icon{display:inline-block;width:1em;height:1em;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- Header ---------- */
+header{position:sticky;top:0;z-index:40;background:rgba(246,244,239,.86);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--border-lt)}
+.hdr{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:19px;font-weight:600;color:var(--tx);text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+.logo-mk{width:32px;height:32px;border-radius:9px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}
+.logo-mk svg{width:17px;height:17px}
+.nav{display:flex;gap:2px;padding:4px;background:var(--surface);border:1px solid var(--border-lt);border-radius:11px;box-shadow:var(--sh-sm)}
+.nav a{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--tx2);text-decoration:none;padding:7px 14px;border-radius:8px;transition:background .15s,color .15s;white-space:nowrap}
+.nav a:hover{color:var(--tx);background:var(--surface-alt)}
+.nav a.on{background:var(--tx);color:#fff}
+.nav a svg{width:15px;height:15px}
+.hbadges{display:flex;gap:6px}
+.hb{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;letter-spacing:.2px;border:1px solid var(--border-lt);background:var(--surface);color:var(--tx2)}
+
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 56px;border-bottom:1px solid var(--border-lt)}
+.hero-g{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:end}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.eyebrow::before{content:"";width:22px;height:1.5px;background:currentColor}
+.hero h1{font-family:var(--serif);font-size:clamp(34px,5vw,54px);font-weight:500;line-height:1.06;letter-spacing:-.025em;margin-top:16px;max-width:760px;text-wrap:balance}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero p.lede{margin-top:18px;font-size:17px;color:var(--tx2);max-width:620px;line-height:1.7;text-wrap:pretty}
+.pipe{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:28px}
+.hbdg{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 14px;border-radius:10px;border:1px solid;background:var(--surface)}
+.hbdg svg{width:16px;height:16px}
+.hbdg small{font-family:var(--mono);font-size:10.5px;font-weight:600;opacity:.7}
+.hbdg.g1{background:var(--purple-bg);color:var(--purple);border-color:var(--purple-bd)}
+.hbdg.g2{background:var(--teal-bg);color:var(--teal);border-color:var(--teal-bd)}
+.hbdg.g3{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-bd)}
+.hbdg.ok{background:var(--green-bg);color:var(--green);border-color:var(--green-bd)}
+.pipe-ar{color:var(--edge);display:flex}
+.pipe-ar svg{width:18px;height:18px}
+.stats{background:var(--surface);border:1px solid var(--border-lt);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
+.stat{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border-lt)}
+.stat:last-child{border-bottom:none}
+.stat-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stat-ic svg{width:19px;height:19px}
+.stat-ic.pur{background:var(--purple-bg);color:var(--purple)}.stat-ic.tea{background:var(--teal-bg);color:var(--teal)}.stat-ic.cor{background:var(--coral-bg);color:var(--coral)}
+.stat-n{font-family:var(--serif);font-size:30px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.stat-l{font-size:12.5px;color:var(--tx3);margin-top:3px}
+
+/* ---------- Sections ---------- */
+section{padding:56px 0 64px}
+.sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.sh h2{font-family:var(--serif);font-size:clamp(26px,3.2vw,34px);font-weight:500;letter-spacing:-.02em;line-height:1.15;margin-top:10px;text-wrap:balance}
+.sh-sub{font-size:15px;color:var(--tx2);margin-top:8px;max-width:640px;line-height:1.65;text-wrap:pretty}
+.sh-ic{display:none}
+
+/* ---------- Scenario tabs ---------- */
+.tabs-wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px;padding:12px 14px;background:var(--surface);border:1px solid var(--border-lt);border-radius:var(--r);box-shadow:var(--sh-sm)}
+.tabs-lb{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.tabs-lb svg{width:14px;height:14px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--tx2);cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab svg{width:14px;height:14px}
+.tab:hover{border-color:var(--tx3);color:var(--tx)}
+.tab.on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 2px 6px rgba(29,59,114,.25)}
+
+/* ---------- Flowchart ---------- */
+.two{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:start}
+.flow{background:var(--surface-alt);background-image:radial-gradient(circle,rgba(22,24,29,.09) 1px,transparent 1.2px);background-size:18px 18px;border:1px solid var(--border);border-radius:var(--r);padding:32px 28px 20px}
+.fc-wrap{position:relative}
+.fc-svg{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:visible}
+.fc-labels{position:absolute;inset:0;pointer-events:none;z-index:2}
+.fc-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.55fr) minmax(0,.62fr);column-gap:44px;row-gap:40px;grid-template-areas:". entry ." ". classify ." "ext anti ." "ext g1 fail" ". g2 fail" ". g3 fail" ". adm .";align-items:start}
+.fc-grid [data-node="extractive"]{align-self:start}
+.fc-grid [data-node="fail"]{align-self:center}
+.fe{fill:none;stroke:var(--edge);stroke-width:1.6;transition:opacity .25s}
+.fe.fail{stroke:#d39b9b;stroke-dasharray:5 4}
+.fe.dim{opacity:.22}
+.fe.act{stroke:var(--accent);stroke-width:2.4;stroke-dasharray:7 5;animation:flow 1s linear infinite}
+.fe.fail.act{stroke:var(--red)}
+@keyframes flow{to{stroke-dashoffset:-12}}
+.fe-lb{position:absolute;font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--tx3);background:var(--surface-alt);padding:1px 6px;border-radius:5px;white-space:nowrap;transition:opacity .25s;line-height:1.5}
+.fe-lb.v{transform:translate(10px,-50%)}
+.fe-lb.h{transform:translate(-50%,-140%)}
+.fe-lb.vl{transform:translate(calc(-100% - 10px),-50%)}
+.fe-lb.hs{transform:translate(6px,-135%)}
+.fe-lb.fail{color:var(--red)}
+.fe-lb.yes{color:var(--coral)}.fe-lb.no{color:var(--teal)}
+.fe-lb.dim{opacity:.3}
+.fe-lb.act{color:var(--accent);background:var(--accent-lt)}
+.fe-lb.fail.act{color:var(--red);background:var(--red-bg)}
+
+.fn{--rc:var(--accent);--ring:var(--accent-lt);position:relative;display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:13px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:var(--sh);cursor:pointer;transition:border-color .2s,box-shadow .2s,opacity .25s,transform .2s}
+.fn:hover{border-color:var(--rc);transform:translateY(-1px);box-shadow:var(--sh-md)}
+.fn.g1{--rc:var(--purple);--ring:var(--purple-bg);border-left:4px solid var(--purple)}
+.fn.g2{--rc:var(--teal);--ring:var(--teal-bg);border-left:4px solid var(--teal)}
+.fn.g3{--rc:var(--blue);--ring:var(--blue-bg);border-left:4px solid var(--blue)}
+.fn.ok{--rc:var(--green);--ring:var(--green-bg);background:var(--green-bg);border-color:var(--green-bd)}
+.fn.dec{--rc:var(--amber);--ring:var(--amber-bg)}
+.fn.ext{--rc:var(--teal);--ring:var(--teal-bg)}
+.fn.sel{border-color:var(--rc);box-shadow:0 0 0 4px var(--ring),var(--sh-md)}
+.fn.sel .fn-t{color:var(--rc)}
+.fn.dim{opacity:.3;pointer-events:none;box-shadow:none}
+.fn-ic{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface-alt);color:var(--tx2)}
+.fn-ic svg{width:16px;height:16px}
+.g1 .fn-ic{background:var(--purple-bg);color:var(--purple)}.g2 .fn-ic{background:var(--teal-bg);color:var(--teal)}.g3 .fn-ic{background:var(--blue-bg);color:var(--blue)}
+.ok .fn-ic{background:rgba(23,112,63,.12);color:var(--green)}
+.ext .fn-ic{background:var(--teal-bg);color:var(--teal)}
+.dec .fn-ic{background:var(--amber-bg);color:var(--amber);transform:rotate(45deg);border-radius:7px;width:28px;height:28px;margin:2px}
+.dec .fn-ic svg{transform:rotate(-45deg)}
+.fn-tx{flex:1;min-width:0;display:block}
+.fn-t{display:block;font-size:14px;font-weight:600;line-height:1.3;letter-spacing:-.005em;transition:color .2s}
+.fn-sub{display:block;font-size:12px;color:var(--tx2);margin-top:3px;line-height:1.45}
+.fn-idx{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--tx3);background:var(--surface-alt);border:1px solid var(--border-lt);padding:1px 6px;border-radius:5px;flex-shrink:0;line-height:1.6}
+.ok .fn-idx{background:rgba(255,255,255,.6)}
+.fn-fail{display:none}
+.ext .fn-idx{display:none}
+.ext .fn-t{overflow-wrap:anywhere}
+.anti{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 12px;border:1.5px dashed var(--amber-bd);border-radius:10px;background:var(--amber-bg);color:var(--amber);font-size:12px;font-weight:600;text-align:center;line-height:1.35;transition:opacity .25s}
+.anti svg{width:15px;height:15px}
+.anti.dim{opacity:.3}
+.fterm{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:16px 12px;border:1.5px dashed var(--red-bd);border-radius:12px;background:var(--red-bg);color:var(--red);transition:opacity .25s,box-shadow .25s}
+.fterm svg{width:22px;height:22px}
+.fterm b{font-size:13.5px;font-weight:700}
+.fterm span{font-size:11.5px;color:var(--tx2);line-height:1.4}
+.fterm.dim{opacity:.3}
+.fterm.act{border-style:solid;border-color:var(--red);box-shadow:0 0 0 4px rgba(163,41,43,.1)}
+.fc-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--tx3)}
+.fc-legend span{display:inline-flex;align-items:center;gap:8px}
+.fc-legend svg{width:30px;height:8px}
+
+/* ---------- Inspector ---------- */
+.insp{position:sticky;top:84px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:26px;max-height:calc(100vh - 104px);overflow-y:auto;box-shadow:var(--sh-md)}
+.insp-lb{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--accent);padding:4px 10px;background:var(--accent-lt);border-radius:7px;margin-bottom:12px}
+.insp-lb svg{width:13px;height:13px}
+.insp h3{font-family:var(--serif);font-size:25px;font-weight:500;line-height:1.2;letter-spacing:-.015em;margin-bottom:6px}
+.insp-s{font-size:13px;color:var(--tx3);margin-bottom:16px}
+.insp>p{font-size:14.5px;color:var(--tx2);line-height:1.75}
+.rbox{margin-top:18px;padding:14px 16px;background:var(--surface-alt);border-radius:var(--r-sm);border-left:3px solid var(--accent)}
+.rbox .rl{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em}
+.rbox .rl svg{width:14px;height:14px}
+.rbox p{font-size:13.5px;line-height:1.7;color:var(--tx2)}
+.clist{margin-top:22px}
+.clist h4{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--tx3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em}
+.clist h4 svg{width:14px;height:14px}
+.crit{padding:12px 0;border-bottom:1px solid var(--border-lt)}.crit:last-child{border-bottom:none}
+.cr-h{display:flex;align-items:center;gap:9px}
+.cr-s{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--accent);width:22px;height:22px;border-radius:6px;background:var(--accent-lt);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cr-l{font-size:14px;font-weight:600}
+.cr-d{font-size:13px;color:var(--tx2);margin-top:4px;padding-left:31px;line-height:1.6}
+.ltags{padding-left:31px;margin-top:7px;display:flex;flex-wrap:wrap;gap:4px}
+.lt{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:999px}
+.lt svg{width:11px;height:11px}
+.lt.daubert{background:var(--amber-bg);color:var(--amber)}.lt.frye{background:#fbe8f1;color:#9b1c55}.lt.fre{background:var(--accent-lt);color:var(--accent)}.lt.nist{background:var(--teal-bg);color:var(--teal)}.lt.eu{background:var(--purple-bg);color:var(--purple)}.lt.caseuco{background:#e2f1fa;color:#0b6595}
+
+/* ---------- Cases ---------- */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;align-items:start}
+.cc{padding:20px;border:1px solid var(--border-lt);border-radius:var(--r);background:var(--surface);cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;box-shadow:var(--sh)}
+.cc:hover{border-color:var(--border);box-shadow:var(--sh-md);transform:translateY(-1px)}
+.cc.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-lt),var(--sh-md)}
+.cc-top{display:flex;align-items:flex-start;gap:12px}
+.cc-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cc-ic svg{width:18px;height:18px}
+.cc-nm{font-family:var(--serif);font-size:18px;font-weight:600;line-height:1.25;letter-spacing:-.01em}
+.cc-yr{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--tx3);margin-left:4px}
+.cc-meta{font-size:12px;color:var(--tx3);margin-top:4px;display:flex;align-items:center;flex-wrap:wrap;gap:4px;line-height:1.4}
+.cc-meta svg{width:12px;height:12px}
+.cc-meta{gap:4px 12px}.mi{display:inline-flex;align-items:center;gap:4px}
+.grs{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.gr{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px}
+.gr svg{width:12px;height:12px}
+.gr.fail{background:var(--red-bg);color:var(--red)}.gr.pass{background:var(--green-bg);color:var(--green)}.gr.partial{background:var(--amber-bg);color:var(--amber)}.gr.na{background:var(--surface-alt);color:var(--tx3)}.gr.none{background:var(--purple-bg);color:var(--purple)}
+.cc-out{margin-top:14px;padding-top:12px;border-top:1px solid var(--border-lt);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
+.cc-out svg{width:15px;height:15px}
+.cd-box{padding:26px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh-md);margin-top:20px}
+.cd-box h3{font-family:var(--serif);font-size:23px;font-weight:500;letter-spacing:-.01em}
+
+button.gr{font-family:var(--sans);border:1px solid transparent;cursor:pointer;padding:4px 7px 4px 9px;transition:transform .15s,box-shadow .15s,border-color .15s}
+button.gr:hover{transform:translateY(-1px);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+button.gr .chev{width:11px;height:11px;margin-left:1px;opacity:.6;transition:transform .25s ease}
+button.gr[aria-expanded="true"] .chev{transform:rotate(180deg)}
+button.gr[data-g="g1"][aria-expanded="true"]{border-color:var(--purple);box-shadow:0 0 0 2px var(--purple-bg)}
+button.gr[data-g="g2"][aria-expanded="true"]{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal-bg)}
+button.gr[data-g="g3"][aria-expanded="true"]{border-color:var(--blue);box-shadow:0 0 0 2px var(--blue-bg)}
+.gp{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .38s cubic-bezier(.4,0,.2,1),opacity .25s ease,margin-top .38s cubic-bezier(.4,0,.2,1);cursor:default}
+.gp.open{opacity:1;margin-top:12px}
+.gp-in{border:1px solid var(--border-lt);border-left:3px solid var(--gc);border-radius:10px;background:var(--surface-alt)}
+.gp.g1{--gc:var(--purple);--gcb:var(--purple-bg)}.gp.g2{--gc:var(--teal);--gcb:var(--teal-bg)}.gp.g3{--gc:var(--blue);--gcb:var(--blue-bg)}
+.gp-h{display:flex;align-items:center;gap:8px;padding:10px 8px 10px 12px;border-bottom:1px solid var(--border-lt);cursor:pointer}
+.gp-hic{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--gcb);color:var(--gc);flex-shrink:0}
+.gp-hic svg{width:13px;height:13px}
+.gp-t{font-size:12.5px;font-weight:700;color:var(--gc)}
+.gp-ct{margin-left:auto;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--tx3);padding:2px 7px;background:var(--surface);border:1px solid var(--border-lt);border-radius:5px;white-space:nowrap}
+.gp-x{width:26px;height:26px;border:none;background:none;border-radius:6px;color:var(--tx3);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,color .15s}
+.gp-x:hover{background:var(--surface);color:var(--tx)}
+.gp-x svg{width:14px;height:14px}
+.gp-rows{list-style:none;padding:2px 12px 4px}
+.gp-row{display:flex;gap:10px;padding:9px 0;border-bottom:1px dashed var(--border)}
+.gp-row:last-child{border-bottom:none}
+.gp-si{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.gp-si svg{width:11px;height:11px;stroke-width:3}
+.gp-si.p{background:var(--green-bg);color:var(--green)}.gp-si.f{background:var(--red-bg);color:var(--red)}.gp-si.pt{background:var(--amber-bg);color:var(--amber)}.gp-si.na{background:var(--surface);color:var(--tx3);border:1px solid var(--border-lt)}.gp-si.nx{background:var(--purple-bg);color:var(--purple)}
+.gp-l{font-size:12.5px;font-weight:600;line-height:1.35;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.gp-st{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.gp-st.p{color:var(--green)}.gp-st.f{color:var(--red)}.gp-st.pt{color:var(--amber)}.gp-st.na{color:var(--tx3)}.gp-st.nx{color:var(--purple)}
+.gp-e{font-size:12px;color:var(--tx3);line-height:1.55;margin-top:2px}
+.gp-note{display:flex;gap:8px;padding:12px;font-size:12px;color:var(--tx3);line-height:1.55}
+.gp-note svg{width:14px;height:14px;flex-shrink:0;margin-top:2px}
+
+/* ---------- Jurisdictions ---------- */
+.jtbl{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;background:var(--surface);border:1px solid var(--border-lt);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+.jtbl th{text-align:left;padding:14px 16px;background:var(--surface-alt);font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border)}
+.jtbl th:nth-child(2){box-shadow:inset 0 3px 0 var(--purple)}.jtbl th:nth-child(3){box-shadow:inset 0 3px 0 var(--teal)}.jtbl th:nth-child(4){box-shadow:inset 0 3px 0 var(--blue)}
+.jtbl th svg{width:14px;height:14px;vertical-align:-2px;margin-right:5px}
+.jtbl td{padding:15px 16px;border-bottom:1px solid var(--border-lt);vertical-align:top;line-height:1.6;color:var(--tx2)}
+.jtbl tr:last-child td{border-bottom:none}
+.jtbl tbody tr{transition:background .15s}
+.jtbl tbody tr:hover td{background:#fbfaf7}
+.jn{font-weight:600;color:var(--tx);white-space:nowrap;display:flex;align-items:center;gap:8px}
+.jn svg{width:16px;height:16px;color:var(--accent)}
+
+/* ---------- Assessment ---------- */
+.af{max-width:760px}
+.fg{margin-bottom:20px}
+.fg label{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;margin-bottom:8px}
+.fg label svg{width:15px;height:15px;color:var(--accent)}
+.fg input,.fg select{width:100%;padding:11px 14px;font-size:14.5px;font-family:var(--sans);border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--tx);transition:border-color .15s,box-shadow .15s;box-shadow:var(--sh-sm)}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-lt)}
+.gs{margin-top:22px;padding:20px;border:1px solid var(--border-lt);border-radius:var(--r);background:var(--surface);box-shadow:var(--sh)}
+.gs-h{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--border-lt);margin-bottom:6px}
+.gs-ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gs-ic svg{width:17px;height:17px}
+.gs-t{font-size:15px;font-weight:600}
+.gs-s{font-size:12px;color:var(--tx3)}
+.gs-p{margin-left:auto;font-family:var(--mono);font-size:12px;font-weight:600;padding:4px 10px;border-radius:7px}
+.cl{list-style:none}
+.cl li{display:flex;align-items:flex-start;gap:12px;padding:12px 6px;border-bottom:1px solid var(--border-lt);border-radius:6px;transition:background .15s}
+.cl li:last-child{border-bottom:none}
+.cl li:hover{background:var(--surface-alt)}
+.cl input[type=checkbox]{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);flex-shrink:0;cursor:pointer}
+.cl-l{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.cl-l svg{width:14px;height:14px;color:var(--tx3)}
+.cl-d{font-size:12.5px;color:var(--tx2);margin-top:2px;line-height:1.55}
+.ar{margin-top:24px;padding:24px;border-radius:var(--r);border:1px solid;box-shadow:var(--sh)}
+.ar.ok{border-color:var(--green-bd);background:var(--green-bg)}.ar.bad{border-color:var(--red-bd);background:var(--red-bg)}.ar.inc{border-color:var(--border);background:var(--surface-alt)}
+.ar h3{display:flex;align-items:center;gap:8px;font-family:var(--serif);font-size:23px;font-weight:500;margin-bottom:8px}
+.ar h3 svg{width:22px;height:22px}
+.ar p{font-size:14.5px;color:var(--tx2);line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;font-size:14px;font-weight:600;font-family:var(--sans);border:none;border-radius:10px;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s}
+.btn svg{width:16px;height:16px}
+.btn-p{background:var(--accent);color:#fff;box-shadow:0 2px 6px rgba(29,59,114,.25)}.btn-p:hover{background:var(--accent-h);transform:translateY(-1px)}
+
+/* ---------- Footer ---------- */
+.load-err{grid-column:1/-1;display:flex;gap:12px;align-items:flex-start;padding:18px 20px;border:1px solid var(--amber-bd);background:var(--amber-bg);border-radius:var(--r);color:var(--tx2);font-size:14px;line-height:1.6}
+.load-err svg{color:var(--amber);margin-top:2px}
+.load-err code{font-family:var(--mono);font-size:12.5px;background:rgba(255,255,255,.7);padding:1px 5px;border-radius:4px}
+
+footer{padding:36px 0;border-top:1px solid var(--border-lt);background:var(--surface-alt)}
+.ft{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--tx3)}
+.ft em{font-family:var(--serif);font-size:14px;color:var(--tx2)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1060px){.two{grid-template-columns:1fr}.insp{position:static;max-height:none}.hbadges{display:none}}
+@media(max-width:900px){.hero-g{grid-template-columns:1fr;gap:32px}.stats{display:grid;grid-template-columns:repeat(3,1fr)}.stat{border-bottom:none;border-right:1px solid var(--border-lt);flex-direction:column;align-items:flex-start;gap:10px}.stat:last-child{border-right:none}}
+@media(max-width:760px){.container{padding:0 16px}.nav a span{display:none}.nav a{padding:8px 11px}.hero{padding:40px 0 36px}.logo span{display:none}
+.flow{padding:20px 12px 14px}
+.fc-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);column-gap:18px;row-gap:34px;grid-template-areas:"entry entry" "classify classify" "ext anti" "ext g1" ". g2" ". g3" ". adm"}
+.fc-grid [data-node="fail"]{display:none}
+.fn{padding:11px 11px;gap:9px}.fn-ic{width:28px;height:28px}.fn-idx{display:none}.fn-t{font-size:13px}.fn-sub{font-size:11.5px}
+.fn.g1 .fn-fail,.fn.g2 .fn-fail,.fn.g3 .fn-fail{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:10.5px;font-weight:600;color:var(--red)}
+.fn-fail svg{width:11px;height:11px}
+.stats{grid-template-columns:1fr}.stat{border-right:none;border-bottom:1px solid var(--border-lt);flex-direction:row;align-items:center}
+.cgrid{grid-template-columns:1fr}
+.jtbl{font-size:12.5px}.jtbl td,.jtbl th{padding:10px 10px}
+.insp{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+<symbol id="i-scale" viewBox="0 0 24 24"><path d="M3 3l7.07 16.97 2.51-6.03 6.03-2.51z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 13l5.07 5.07M13.57 13.57L10 17.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-gavel" viewBox="0 0 24 24"><path d="M13 10l7.5-7.5M3 21l3-3m4-4l-3 3M17.5 6.5l-10 10M14 3l7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-world" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.6 9h16.8M3.6 15h16.8M11.5 3a17 17 0 000 18M12.5 3a17 17 0 010 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 14l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 001 1h4M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8zM9 17h6M9 13h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M9 15l6-6M11 6l.463-.536a5 5 0 017.071 7.072L18 13M13 18l-.397.534a5.068 5.068 0 01-7.127 0 4.972 4.972 0 010-7.071L6 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 4a4 4 0 014 4v1a3 3 0 012 5.235V17a3 3 0 01-3 3h-6a3 3 0 01-3-3v-2.765A3 3 0 018 9V8a4 4 0 014-4zM10 17v-6M14 17v-6M8 13h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M5.07 19H18.93a1.78 1.78 0 001.54-2.68L13.54 4.26a1.78 1.78 0 00-3.08 0L3.53 16.32A1.78 1.78 0 005.07 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-tilde" viewBox="0 0 24 24"><path d="M4 12c0-3 2.5-5 5-3s5 0 5-3 2.5-5 5-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="7" width="12" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 12l6-3.5v7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-face" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 012-2h2M4 16v2a2 2 0 002 2h2M16 4h2a2 2 0 012 2v2M16 20h2a2 2 0 002-2v-2M9 10h.01M15 10h.01M9.5 15a3.5 3.5 0 005 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-dna" viewBox="0 0 24 24"><path d="M17 2v2a7 7 0 01-7 7 7 7 0 00-7 7v2M7 2v2a7 7 0 007 7 7 7 0 017 7v2M8 6h8M8 18h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 4h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 16l5-5c.928-.893 2.072-.893 3 0l4 4M14 14l1-1c.928-.893 2.072-.893 3 0l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3a12 12 0 008.5 3A12 12 0 0112 21 12 12 0 013.5 6 12 12 0 0012 3zM9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="6" ry="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 5v14c0 1.1 2.686 2 6 2s6-.9 6-2V5M6 12c0 1.1 2.686 2 6 2s6-.9 6-2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M14 4l-4 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 16a5 5 0 1 1 6 0M12 21a2 2 0 01-2-2h4a2 2 0 01-2 2zM10 17h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14M13 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-git" viewBox="0 0 24 24"><circle cx="7" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="7" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 8v8M17 8a4 4 0 01-4 4H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 11V7a4 4 0 018 0v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 12V9a3 3 0 013-3h13M17 10l3-4-3-4M20 12v3a3 3 0 01-3 3H4M7 14l-3 4 3 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="8" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="8" width="4" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17" y="4" width="4" height="16" rx="1" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M3.5 5.5l1.5 1.5 2.5-2.5M3.5 11.5l1.5 1.5 2.5-2.5M3.5 17.5l1.5 1.5 2.5-2.5M11 6h9M11 12h9M11 18h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8h.01M11 12h1v4h1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="M12 6l4 6 5-4-2 10H5L3 8l5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 21c.5-4.5 2.5-8 7-10M9 18c6.218 0 10.5-3.288 11-12-4 .914-6 2-8.875 3.563C7.13 11.05 5 13 5 16c0 1 .5 2 4 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9v.01M15 9v.01M9 13v.01M15 13v.01M9 17v.01M15 17v.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 5a5 5 0 017 0 5 5 0 007 0v9a5 5 0 01-7 0 5 5 0 00-7 0zM5 21v-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 7 8 11.7z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><circle cx="8.5" cy="8.5" r="1" fill="currentColor"/><path d="M3 6a3 3 0 013-3h5.172a2 2 0 011.414.586l7.71 7.71a2.41 2.41 0 010 3.408l-5.592 5.592a2.41 2.41 0 01-3.408 0l-7.71-7.71A2 2 0 013 11.172z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5.7 5.7l12.6 12.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-fsearch" viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 001 1h4M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="13.5" cy="16.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 18.5l2 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-wave" viewBox="0 0 24 24"><path d="M3 12c2-2.5 4-4 6-1.5s4 1 6-1.5 4-4 6-1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="9" y="9" width="6" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h2M3 14h2M19 10h2M19 14h2M10 3v2M14 3v2M10 19v2M14 19v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-id" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 16a2 2 0 014 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-splits" viewBox="0 0 24 24"><path d="M21 17h-5.397a2 2 0 01-1.71-.96L10.69 11.04a2 2 0 00-1.71-.96L3 10M21 7h-5.395a2 2 0 00-1.71.96L10.69 12.96a2 2 0 01-1.71.96L3 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-cert" viewBox="0 0 24 24"><circle cx="15" cy="15" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 17.5V22l2-1.5 2 1.5v-4.5M3 19V7a2 2 0 012-2h14a2 2 0 012 2v3M7 10h3M7 14h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-versions" viewBox="0 0 24 24"><rect x="10" y="5" width="10" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 7v14M4 9v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-sitemap" viewBox="0 0 24 24"><rect x="3" y="15" width="4" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17" y="15" width="4" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="15" width="4" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="5" width="4" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 9v2M5 15v-2a2 2 0 012-2h10a2 2 0 012 2v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-checks" viewBox="0 0 24 24"><path d="M7 12l5 5L22 7M2 12l5 5M17 7l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header><div class="container hdr">
+<a href="#" class="logo" onclick="go('fw');return false"><span class="logo-mk"><svg class="icon"><use href="#i-scale"/></svg></span><span>Three-Gate Framework</span></a>
+<nav class="nav" id="nav" aria-label="Sections">
+<a href="#sec-fw" class="on" onclick="go('fw');return false"><svg class="icon"><use href="#i-splits"/></svg><span>Framework</span></a>
+<a href="#sec-cs" onclick="go('cs');return false"><svg class="icon"><use href="#i-gavel"/></svg><span>Cases</span></a>
+<a href="#sec-jr" onclick="go('jr');return false"><svg class="icon"><use href="#i-world"/></svg><span>Jurisdictions</span></a>
+<a href="#sec-as" onclick="go('as');return false"><svg class="icon"><use href="#i-clipboard"/></svg><span>Assessment</span></a>
+</nav>
+<div class="hbadges"><span class="hb">Femi-Adeyinka &amp; Varol</span><span class="hb">ISDFS 2027</span></div>
+</div></header>
+
+<div class="container">
+<div class="hero"><div class="hero-g"><div>
+<div class="eyebrow">Interactive companion · ISDFS 2027</div>
+<h1>Judicial oversight of <em>AI-generated</em> digital evidence</h1>
+<p class="lede">A working companion to “Governing AI in the Courtroom.” Follow an AI-derived exhibit through disclosure, reliability, and provenance review, test the framework against <span data-count="cases" data-fmt="lower">sixteen</span> decided cases, compare <span data-count="jurs" data-fmt="lower">seven</span> jurisdictions, and run an assessment of your own.</p>
+<div class="pipe" aria-label="The three gates, in order">
+<span class="hbdg g1"><svg class="icon"><use href="#i-file"/></svg> Disclosure <small>G1</small></span>
+<span class="pipe-ar"><svg class="icon"><use href="#i-arrow-r"/></svg></span>
+<span class="hbdg g2"><svg class="icon"><use href="#i-target"/></svg> Reliability <small>G2</small></span>
+<span class="pipe-ar"><svg class="icon"><use href="#i-arrow-r"/></svg></span>
+<span class="hbdg g3"><svg class="icon"><use href="#i-link"/></svg> Provenance <small>G3</small></span>
+<span class="pipe-ar"><svg class="icon"><use href="#i-arrow-r"/></svg></span>
+<span class="hbdg ok"><svg class="icon"><use href="#i-check-c"/></svg> Admissible</span>
+</div></div>
+<div class="stats">
+<div class="stat"><div class="stat-ic cor"><svg class="icon"><use href="#i-gavel"/></svg></div><div><div class="stat-n" data-count="cases">16</div><div class="stat-l">Cases analyzed</div></div></div>
+<div class="stat"><div class="stat-ic pur"><svg class="icon"><use href="#i-world"/></svg></div><div><div class="stat-n" data-count="jurs">7</div><div class="stat-l">Jurisdictions compared</div></div></div>
+<div class="stat"><div class="stat-ic tea"><svg class="icon"><use href="#i-list"/></svg></div><div><div class="stat-n">13</div><div class="stat-l">Gate requirements</div></div></div>
+</div></div></div>
+
+<section id="sec-fw">
+<div class="sh"><div><div class="eyebrow">01 · Framework</div><h2>How an AI exhibit moves through the framework</h2><div class="sh-sub">Select any step to see its requirements and the legal standards behind them. Choose a scenario to trace the path a real type of evidence takes.</div></div></div>
+<div class="tabs-wrap"><span class="tabs-lb"><svg class="icon"><use href="#i-splits"/></svg> Trace a scenario</span><div class="tabs" id="stabs"></div></div>
+<div class="two"><div class="flow" id="flow"></div><aside class="insp" id="insp" aria-live="polite"></aside></div>
+</section>
+
+<section id="sec-cs" style="display:none">
+<div class="sh"><div><div class="eyebrow">02 · Cases</div><h2><span data-count="cases" data-fmt="word">Sixteen</span> cases through the three-gate lens</h2><div class="sh-sub">Open a gate badge to see each requirement, whether it was met, and why. Select a card for the case summary.</div></div></div>
+<div class="cgrid" id="cgrid"></div><div id="cdet"></div>
+</section>
+
+<section id="sec-jr" style="display:none">
+<div class="sh"><div><div class="eyebrow">03 · Jurisdictions</div><h2><span data-count="jurs" data-fmt="word">Seven</span> legal systems, the same three questions</h2><div class="sh-sub">How each jurisdiction currently handles disclosure, reliability, and provenance for AI-generated evidence.</div></div></div>
+<div style="overflow-x:auto"><table class="jtbl" id="jtbl"></table></div>
+</section>
+
+<section id="sec-as" style="display:none">
+<div class="sh"><div><div class="eyebrow">04 · Assessment</div><h2>Assess an AI exhibit</h2><div class="sh-sub">Classify the tool first. If it is interpretive, check each requirement the proponent can document, then evaluate to see which gates clear.</div></div></div>
+<div class="af" id="aform"></div>
+</section>
+</div>
+
+<footer><div class="container"><div class="ft">
+<span>Companion to <em>Governing AI in the Courtroom</em> · Femi-Adeyinka &amp; Varol · ISDFS 2027</span>
+<span>Sam Houston State University</span>
+</div></div></footer>
+
+<script>
+function I(id,s){s=s||16;return `<svg class="icon" style="width:${s}px;height:${s}px"><use href="#i-${id}"/></svg>`}
+const NIC={entry:"file",classify:"git",extractive:"search",disclosure:"file",reliability:"target",provenance:"link",admissible:"check-c"};
+const NODES=[
+{id:"entry",t:"AI forensic evidence submitted",s:"Any AI-generated or AI-transformed exhibit offered into record",idx:"00",tr:"shared",g:null,sum:"The entry point for any exhibit generated or transformed by an AI system.",rule:"Before evidentiary weight is assessed, the artifact enters functional triage to determine whether the model retrieved existing facts or synthesized new inferences.",cr:[{sym:"①",l:"Artifact capture",d:"Preserves raw model outputs, prompts, parameters, and exhibit files at intake.",tg:[]},{sym:"②",l:"Procedural posture",d:"Identifies the offering party, intended factual proposition, and scope of reliance.",tg:[]}]},
+{id:"classify",t:"Function classification",s:"Does the tool classify, infer, enhance, or generate?",idx:"PRE",tr:"shared",g:null,sum:"Separates extractive retrieval from interpretive processing. This distinction determines the scrutiny pathway.",rule:"Systems that strictly locate or format existing source material proceed under traditional rules. Systems that infer, score, reconstruct, or generate trigger the three-gate pipeline.",cr:[{sym:"E",l:"Extractive threshold",d:"Output directly verifiable against an unchanged source without probabilistic inference.",tg:[]},{sym:"I",l:"Interpretive threshold",d:"Output introduces judgment, classification, synthesis, prediction, or probabilistic scoring.",tg:[]}]},
+{id:"extractive",t:"Extractive → Traditional admission",s:"Standard authentication under FRE 901/902",idx:"T",tr:"extractive",g:null,sum:"Tools that index, transcribe, parse, or surface existing records without altering underlying meaning.",rule:"A sponsoring witness or foundational affidavit showing accurate retrieval and intact source correspondence satisfies admission.",cr:[{sym:"①",l:"Source correspondence",d:"Every extracted span maps one-to-one to a verifiable location in the primary record.",tg:["fre"]},{sym:"②",l:"Direct inspection",d:"Opposing counsel can cross-check the extracted item against the raw source.",tg:["fre"]}]},
+{id:"disclosure",t:"Gate 1 — Disclosure",s:"Model card · Datasheet · Tool version · Validation · Source code",idx:"G1",tr:"interpretive",g:"g1",sum:"Minimum information required before AI-derived evidence may be considered. Maps to Daubert peer review, Frye acceptance, FRE 702 basis.",rule:"Gate 1 clears when model identity, configuration, training data boundaries, validation results, and legal notice obligations are formally documented and disclosed.",cr:[{sym:"①",l:"Model card",d:"Intended use, performance metrics by subgroup, training data characteristics, limitations, version history.",tg:["daubert","nist"]},{sym:"②",l:"Datasheet for data",d:"Composition, collection process, preprocessing, recommended uses for training/validation data.",tg:["daubert","nist"]},{sym:"③",l:"Tool identification",d:"Specific software version, build number, configuration parameters used in this case.",tg:["fre"]},{sym:"④",l:"Validation report",d:"Independent forensic-community validation, not solely vendor-conducted studies.",tg:["daubert","frye"]},{sym:"⑤",l:"Source code access",d:"Under protective order upon particularized need (Pickett–Miles trajectory).",tg:["fre","frye"]}]},
+{id:"reliability",t:"Gate 2 — Reliability as applied",s:"Domain validation · Error rate · Version results · XAI",idx:"G2",tr:"interpretive",g:"g2",sum:"Case-specific reliability per FRE 702 (2023) “reliable application” amendment. PCAST foundational vs. applied validity.",rule:"Proponent must show input within validated domain, known error rate for the specific domain/task, and version-specific validation.",cr:[{sym:"①",l:"Domain validation",d:"Input falls within the validated domain (image resolution, file format, device type).",tg:["daubert","nist"]},{sym:"②",l:"Error-rate specification",d:"Known error rate for specific input domain. Single global rate insufficient for data-dependent models.",tg:["daubert"]},{sym:"③",l:"Version-specific results",d:"Validation for the exact software version used, not a different version.",tg:["fre","nist"]},{sym:"④",l:"Explainability output",d:"XAI artifacts: feature attributions, confidence intervals, attention maps.",tg:["nist","eu"]}]},
+{id:"provenance",t:"Gate 3 — Provenance",s:"CASE/UCO record · Hash chain · Params · Reproducibility",idx:"G3",tr:"interpretive",g:"g3",sum:"Computational chain of custody — unbroken, machine-readable record of each AI pipeline transformation. CASE/UCO backbone.",rule:"Ensures artifact not altered, cherry-picked, or corrupted across storage, transformation, or model updates.",cr:[{sym:"①",l:"Provenance record",d:"CASE-compliant log: tool identity, version, input/output hashes, timestamps, W3C PROV-O aligned.",tg:["caseuco","fre"]},{sym:"②",l:"Cryptographic integrity",d:"Hash verification at each pipeline stage to detect unauthorized modification.",tg:["caseuco"]},{sym:"③",l:"Non-deterministic parameter logging",d:"Seeds, temperature, model weight hashes for stochastic tools.",tg:["nist"]},{sym:"④",l:"Reproducibility pathway",d:"Sufficient documentation for independent examiner to reproduce the analysis.",tg:["daubert","nist"]}]},
+{id:"admissible",t:"Evidence admissible",s:"Subject to weight determination by trier of fact",idx:"✓",tr:"interpretive",g:null,sum:"All three gates satisfied. Weight and credibility remain subject to cross-examination.",rule:"Admissibility permits consideration by the trier of fact. Limitations and error bounds travel alongside the exhibit.",cr:[{sym:"✓",l:"Threshold clearance",d:"All three gates passed with documented foundation.",tg:[]},{sym:"⚖",l:"Fact-finder evaluation",d:"Limitations and error bounds inform weight determination.",tg:["fre"]}]}
+];
+
+
+
+
+/* ---------- Data (loaded from data/*.json) ---------- */
+let CASES=[],GA={},JURISDICTIONS=[],DATA_OK=false;
+const ST_CODE={met:"p",not_met:"f",partial:"pt",na:"na",not_examined:"nx"};
+const NUM_W=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen","Twenty"];
+const numWord=n=>NUM_W[n]||String(n);
+async function loadData(){
+try{
+const [c,j]=await Promise.all(["data/cases.json","data/jurisdictions.json"].map(u=>fetch(u,{cache:"no-cache"}).then(r=>{if(!r.ok)throw new Error(u+" → HTTP "+r.status);return r.json()})));
+CASES=c.cases.map(x=>({id:x.id,nm:x.name,yr:x.year,jur:x.jurisdiction,ty:x.evidenceType,ic:x.icon,cl:`var(--${x.theme})`,bg:`var(--${x.theme}-bg)`,g1:x.gates.g1.result,g2:x.gates.g2.result,g3:x.gates.g3.result,out:x.outcome.label,oi:x.outcome.icon,oc:`var(--${x.outcome.theme})`,det:x.summary}));
+c.cases.forEach(x=>{GA[x.id]={};["g1","g2","g3"].forEach(g=>{const a=x.gates[g];
+GA[x.id][g]=a.requirements?{r:a.requirements.map(r=>[ST_CODE[r.status]||"nx",r.why])}:{note:a.note||""};
+const node=NODES.find(n=>n.id===GDEF[g].node);
+if(a.requirements&&a.requirements.length!==node.cr.length)console.warn(`cases.json: ${x.id}.${g} lists ${a.requirements.length} requirements; the framework has ${node.cr.length}.`);
+})});
+JURISDICTIONS=j.jurisdictions.map(x=>({nm:x.name,ic:x.icon,disc:x.disclosure,rel:x.reliability,prov:x.provenance}));
+DATA_OK=true;
+}catch(err){
+console.error(err);
+const msg=`<div class="load-err">${I("alert",18)}<div><b>Couldn’t load the case data.</b> Browsers block <code>data/*.json</code> when this page is opened straight from disk. Serve the folder instead — run <code>python3 -m http.server</code> in it and open <code>http://localhost:8000</code> — or view the GitHub Pages site.</div></div>`;
+document.getElementById("cgrid").innerHTML=msg;document.getElementById("jtbl").outerHTML=`<div id="jtbl">${msg}</div>`;
+return;
+}
+document.querySelectorAll("[data-count]").forEach(el=>{const n=el.dataset.count==="cases"?CASES.length:JURISDICTIONS.length;el.textContent=el.dataset.fmt==="word"?numWord(n):el.dataset.fmt==="lower"?numWord(n).toLowerCase():n});
+const vis=["cs","jr"].find(id=>document.getElementById("sec-"+id).style.display!=="none");
+if(vis==="cs")rCases();if(vis==="jr")rJur();
+}
+
+const GDEF={g1:{node:"disclosure",nm:"Gate 1 · Disclosure",ic:"file"},g2:{node:"reliability",nm:"Gate 2 · Reliability as applied",ic:"target"},g3:{node:"provenance",nm:"Gate 3 · Provenance",ic:"link"}};
+const RS={p:{ic:"check",lb:"Met"},f:{ic:"x",lb:"Not met"},pt:{ic:"tilde",lb:"Partial"},na:{ic:"minus",lb:"N/A"},nx:{ic:"circle",lb:"Not examined"}};
+
+
+
+const SCENS={none:{tr:"all",hl:[]},cellebrite:{tr:"extractive",hl:["entry","classify","extractive"]},"ai-video":{tr:"interpretive",hl:["entry","classify","disclosure","reliability","provenance"]},"facial-rec":{tr:"interpretive",hl:["entry","classify","disclosure","reliability"]},deepfake:{tr:"interpretive",hl:["entry","classify","provenance"]},"dna-prob":{tr:"interpretive",hl:["entry","classify","disclosure","reliability","provenance","admissible"]},shotspotter:{tr:"interpretive",hl:["entry","classify","disclosure","reliability","provenance"]},"ai-review":{tr:"interpretive",hl:["entry","classify","disclosure","reliability","provenance","admissible"]},compas:{tr:"interpretive",hl:["entry","classify","disclosure","reliability"]}};
+const STAB_DATA=[
+{id:"none",ic:"splits",lb:"All paths"},{id:"cellebrite",ic:"phone",lb:"Cellebrite extraction"},{id:"ai-video",ic:"video",lb:"AI-enhanced video"},{id:"facial-rec",ic:"face",lb:"Facial recognition"},{id:"deepfake",ic:"photo",lb:"Deepfake exhibit"},{id:"dna-prob",ic:"dna",lb:"Probabilistic genotyping"},{id:"shotspotter",ic:"wave",lb:"ShotSpotter detection"},{id:"ai-review",ic:"fsearch",lb:"AI document review"},{id:"compas",ic:"cpu",lb:"Risk assessment (COMPAS)"}
+];
+
+let cNode="entry",cScen="none",cCase=null;
+
+function go(s){
+["fw","cs","jr","as"].forEach(id=>{document.getElementById("sec-"+id).style.display=id===s?"block":"none"});
+document.querySelectorAll("#nav a").forEach((a,i)=>{const ids=["fw","cs","jr","as"];a.classList.toggle("on",ids[i]===s)});const st=document.getElementById("sec-"+s).getBoundingClientRect().top+window.scrollY-70;if(window.scrollY>st)window.scrollTo({top:st,behavior:"smooth"});
+if(s==="fw")requestAnimationFrame(drawEdges);if(s==="cs")rCases();if(s==="jr")rJur();if(s==="as")rAssess();
+}
+
+function initTabs(){
+let h="";STAB_DATA.forEach(t=>{h+=`<button class="tab${t.id==="none"?" on":""}" onclick="setSc('${t.id}')">${I(t.ic,14)} ${t.lb}</button>`});
+document.getElementById("stabs").innerHTML=h;
+}
+
+function setSc(id){
+cScen=id;
+document.querySelectorAll("#stabs .tab").forEach((t,i)=>{t.classList.toggle("on",STAB_DATA[i].id===id)});
+if(id!=="none"){const sc=SCENS[id];cNode=sc.tr==="extractive"?"extractive":"disclosure"}
+rFlow();rInsp();
+}
+
+function selN(id){cNode=id;rFlow();rInsp()}
+
+const GATE_IDS=["disclosure","reliability","provenance"];
+const EDGES=[
+{a:"entry",as:"b",b:"classify",bs:"t"},
+{a:"classify",as:"b",b:"anti",bs:"t",lb:"Yes · interpretive",lk:"yes"},
+{a:"classify",as:"l",b:"extractive",bs:"t",lb:"No · extractive",lk:"no"},
+{a:"anti",as:"b",b:"disclosure",bs:"t"},
+{a:"disclosure",as:"b",b:"reliability",bs:"t",lb:"Pass",pass:1},
+{a:"reliability",as:"b",b:"provenance",bs:"t",lb:"Pass",pass:1},
+{a:"provenance",as:"b",b:"admissible",bs:"t",lb:"Pass",pass:1},
+{a:"disclosure",as:"r",b:"fail",bs:"l",bf:.22,lb:"Fail",k:"fail"},
+{a:"reliability",as:"r",b:"fail",bs:"l",bf:.5,lb:"Fail",k:"fail"},
+{a:"provenance",as:"r",b:"fail",bs:"l",bf:.78,lb:"Fail",k:"fail"}
+];
+function flowState(){
+const sc=SCENS[cScen],hl=sc.hl,tr=sc.tr;
+const on=cScen!=="none";
+const passing=on&&hl.includes("admissible");
+const failing=on&&tr==="interpretive"&&!passing;
+return{on,hl,tr,passing,failing};
+}
+function edgeState(e,S){
+if(!S.on)return"";
+const has=id=>S.hl.includes(id);let act=false;
+if(e.a==="entry")act=true;
+else if(e.b==="extractive")act=S.tr==="extractive";
+else if(e.b==="anti")act=S.tr==="interpretive";
+else if(e.a==="anti")act=has("disclosure");
+else if(e.k==="fail")act=S.failing&&has(e.a);
+else if(e.pass)act=S.passing&&has(e.a)&&has(e.b);
+return act?"act":"dim";
+}
+
+function rFlow(){
+const S=flowState(),hl=S.hl,tr=S.tr;
+const n=id=>NODES.find(x=>x.id===id);
+function cls(node){let c="fn";if(node.g)c+=" "+node.g;if(node.id==="admissible")c+=" ok";if(node.id==="classify")c+=" dec";if(node.id==="extractive")c+=" ext";if(node.id===cNode)c+=" sel";if(tr!=="all"&&node.tr!=="shared"&&node.tr!==tr)c+=" dim";if(hl.length>0&&!hl.includes(node.id)&&tr!=="all")c+=" dim";return c}
+const AREA={entry:"entry",classify:"classify",extractive:"ext",disclosure:"g1",reliability:"g2",provenance:"g3",admissible:"adm"};
+const nd=id=>{const o=n(id);const isGate=GATE_IDS.includes(id);
+return `<button type="button" class="${cls(o)}" data-node="${id}" style="grid-area:${AREA[id]}" aria-pressed="${id===cNode}" onclick="selN('${id}')"><span class="fn-ic">${I(NIC[id],16)}</span><span class="fn-tx"><span class="fn-t">${o.t}</span><span class="fn-sub">${o.s}</span>${isGate?`<span class="fn-fail">${I("x",11)} Fail → not admitted</span>`:""}</span><span class="fn-idx">${o.idx}</span></button>`};
+let g=nd("entry")+nd("classify")+nd("extractive");
+g+=`<div class="anti${tr==="extractive"?" dim":""}" data-node="anti" style="grid-area:anti">${I("alert",15)} Anti-presumption: the proponent bears the burden at every gate</div>`;
+g+=GATE_IDS.map(nd).join("")+nd("admissible");
+g+=`<div class="fterm${S.failing?" act":(S.on?" dim":"")}" data-node="fail" style="grid-area:fail">${I("ban",22)}<b>Not admitted</b><span>A gate requirement was not satisfied</span></div>`;
+const legend=`<div class="fc-legend"><span><svg viewBox="0 0 30 8"><path d="M1 4H29" stroke="#b4ad9e" stroke-width="1.6"/></svg>Path to the next step</span><span><svg viewBox="0 0 30 8"><path d="M1 4H29" stroke="#d39b9b" stroke-width="1.6" stroke-dasharray="5 4"/></svg>Exit when a gate fails</span><span><svg viewBox="0 0 30 8"><path d="M1 4H29" stroke="#1d3b72" stroke-width="2.4" stroke-dasharray="7 5"/></svg>Traced scenario</span></div>`;
+document.getElementById("flow").innerHTML=`<div class="fc-wrap" id="fcw"><svg class="fc-svg" id="fcsvg" aria-hidden="true"></svg><div class="fc-grid">${g}</div><div class="fc-labels" id="fclb" aria-hidden="true"></div></div>${legend}`;
+drawEdges();
+}
+
+function rPath(pts,r){
+pts=pts.filter((p,i)=>i===0||Math.hypot(p[0]-pts[i-1][0],p[1]-pts[i-1][1])>.5);
+let d=`M${pts[0][0]},${pts[0][1]}`;
+for(let i=1;i<pts.length-1;i++){
+const[x0,y0]=pts[i-1],[x,y]=pts[i],[x1,y1]=pts[i+1];
+const d1=Math.hypot(x-x0,y-y0),d2=Math.hypot(x1-x,y1-y),rr=Math.min(r,d1/2,d2/2);
+d+=` L${x+(x0-x)/d1*rr},${y+(y0-y)/d1*rr} Q${x},${y} ${x+(x1-x)/d2*rr},${y+(y1-y)/d2*rr}`;
+}
+const l=pts[pts.length-1];return d+` L${l[0]},${l[1]}`;
+}
+
+function drawEdges(){
+const w=document.getElementById("fcw");if(!w||w.offsetParent===null)return;
+const svg=document.getElementById("fcsvg"),lbl=document.getElementById("fclb");
+const W=w.getBoundingClientRect();
+const R=id=>{const e=w.querySelector(`[data-node="${id}"]`);if(!e||e.offsetParent===null)return null;const r=e.getBoundingClientRect();
+return{l:r.left-W.left,t:r.top-W.top,r:r.right-W.left,b:r.bottom-W.top,cx:(r.left+r.right)/2-W.left,h:r.height,dim:e.classList.contains("dim")}};
+const S=flowState();
+const MK={n:"#b4ad9e",f:"#d39b9b",a:"#1d3b72",fa:"#a3292b"};
+let defs="<defs>"+Object.entries(MK).map(([k,c])=>`<marker id="mk-${k}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1.5L9 5L1 8.5z" fill="${c}"/></marker>`).join("")+"</defs>";
+let paths="",labels="";
+EDGES.forEach(e=>{
+const a=R(e.a),b=R(e.b);if(!a||!b)return;
+let as=e.as;
+// on narrow layouts the extractive box sits under the classifier, so leave from the bottom instead
+if(as==="l"&&b.cx>a.l-4)as="b";
+const st=as==="b"?[a.cx,a.b]:as==="l"?[a.l,a.t+a.h*.5]:[a.r,a.t+a.h*.5];
+const en=e.bs==="t"?[b.cx,b.t-3]:[b.l-3,b.t+b.h*(e.bf??.5)];
+let pts,lp,lc;
+if(as==="b"&&e.bs==="t"){
+if(Math.abs(st[0]-en[0])<2){pts=[st,[st[0],en[1]]];lp=[st[0],(st[1]+en[1])/2];lc="v"}
+else{const ym=(st[1]+en[1])/2;pts=[st,[st[0],ym],[en[0],ym],en];lp=[en[0],(ym+en[1])/2];lc="v"}
+}else if(e.bs==="t"){pts=[st,[en[0],st[1]],en];lp=[(st[0]+en[0])/2,st[1]];lc="h"}
+else{const xm=st[0]+Math.max(14,(en[0]-st[0])/2);pts=[st,[xm,st[1]],[xm,en[1]],en];lp=[st[0],st[1]];lc="hs"}
+if(lc==="v"&&lp[0]+150>W.width)lc="vl";
+const state=edgeState(e,S);
+const mk=e.k==="fail"?(state==="act"?"fa":"f"):(state==="act"?"a":"n");
+paths+=`<path class="fe ${e.k||""} ${state}" d="${rPath(pts,10)}" marker-end="url(#mk-${mk})"/>`;
+if(e.lb)labels+=`<span class="fe-lb ${lc} ${e.k||""} ${e.lk||""} ${state}" style="left:${lp[0]}px;top:${lp[1]}px">${e.lb}</span>`;
+});
+svg.setAttribute("width",W.width);svg.setAttribute("height",W.height);svg.setAttribute("viewBox",`0 0 ${W.width} ${W.height}`);
+svg.innerHTML=defs+paths;lbl.innerHTML=labels;
+}
+if(window.ResizeObserver){new ResizeObserver(()=>drawEdges()).observe(document.getElementById("flow"))}
+window.addEventListener("resize",drawEdges);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drawEdges);
+
+function rInsp(){
+const nd=NODES.find(x=>x.id===cNode);if(!nd)return;
+const tm={daubert:[I("scale",11)+" Daubert","daubert"],frye:[I("cert",11)+" Frye","frye"],fre:[I("file",11)+" FRE 702","fre"],nist:[I("shield",11)+" NIST AI RMF","nist"],eu:[I("flag",11)+" EU AI Act","eu"],caseuco:[I("db",11)+" CASE/UCO","caseuco"]};
+let h=`<div class="insp-lb">${I(NIC[nd.id],13)} ${nd.idx}</div>`;
+h+=`<h3>${nd.t}</h3><div class="insp-s">${nd.s}</div>`;
+h+=`<p>${nd.sum}</p>`;
+h+=`<div class="rbox"><div class="rl">${I("info",14)} Operational rule</div><p>${nd.rule}</p></div>`;
+h+=`<div class="clist"><h4>${I("list",14)} Requirements</h4>`;
+nd.cr.forEach(c=>{
+h+=`<div class="crit"><div class="cr-h"><span class="cr-s">${c.sym}</span><span class="cr-l">${c.l}</span></div><div class="cr-d">${c.d}</div>`;
+if(c.tg&&c.tg.length){h+=`<div class="ltags">`;c.tg.forEach(t=>{const[lb,cl]=tm[t]||[t,t];h+=`<span class="lt ${cl}">${lb}</span>`});h+=`</div>`}
+h+=`</div>`});
+h+=`</div>`;
+document.getElementById("insp").innerHTML=h;
+}
+
+const GR_IC={fail:I("x",12),pass:I("check",12),partial:I("tilde",12),na:I("minus",12),none:I("circle",12)};
+const GR_LB={fail:"✗ Fail",pass:"✓ Pass",partial:"~ Partial",na:"N/A",none:"— None"};
+
+function gateBadge(c,g){
+const s=c[g];
+return `<button type="button" class="gr ${s}" data-g="${g}" aria-expanded="false" aria-controls="gp-${c.id}-${g}" onclick="tgGate(event,'${c.id}','${g}')" title="Show ${GDEF[g].nm} breakdown">${GR_IC[s]} ${g.toUpperCase()}: ${GR_LB[s].replace(/^[✗✓~—]\s*/,"")}${I("chev",11).replace('class="icon"','class="icon chev"')}</button>`;
+}
+function gatePanel(c,g){
+const a=(GA[c.id]||{})[g]||{note:"No requirement-level analysis recorded for this gate."};
+const def=GDEF[g],node=NODES.find(n=>n.id===def.node);
+let body,ct="";
+if(a.r){
+const met=a.r.filter(x=>x[0]==="p").length,app=a.r.filter(x=>x[0]!=="na").length;
+ct=`<span class="gp-ct">${met}/${app} met</span>`;
+body=`<ul class="gp-rows">`+node.cr.map((req,i)=>{const [st,ex]=a.r[i]||["nx","Not analysed."];const R=RS[st];
+return `<li class="gp-row"><span class="gp-si ${st}" title="${R.lb}">${I(R.ic,11)}</span><div><div class="gp-l">${req.l}<span class="gp-st ${st}">${R.lb}</span></div><div class="gp-e">${ex}</div></div></li>`}).join("")+`</ul>`;
+}else{
+ct=`<span class="gp-ct">N/A</span>`;
+body=`<div class="gp-note">${I("info",14)}<span>${a.note}</span></div>`;
+}
+return `<div class="gp ${g}" id="gp-${c.id}-${g}" role="region" aria-label="${def.nm} analysis for ${c.nm}" onclick="event.stopPropagation()"><div class="gp-in"><div class="gp-h" onclick="tgGate(event,'${c.id}','${g}')"><span class="gp-hic">${I(def.ic,13)}</span><span class="gp-t">${def.nm}</span>${ct}<button type="button" class="gp-x" aria-label="Close" onclick="tgGate(event,'${c.id}','${g}')">${I("x",14)}</button></div>${body}</div></div>`;
+}
+
+function rCases(){
+if(!DATA_OK)return;
+let h="";CASES.forEach(c=>{
+h+=`<div class="cc${cCase===c.id?" on":""}" data-id="${c.id}" onclick="selC('${c.id}')">`;
+h+=`<div class="cc-top"><div class="cc-ic" style="background:${c.bg};color:${c.cl}">${I(c.ic,17)}</div><div><div class="cc-nm">${c.nm} <span class="cc-yr">(${c.yr})</span></div><div class="cc-meta"><span class="mi">${I("pin",12)} ${c.jur}</span><span class="mi">${I("tag",12)} ${c.ty}</span></div></div></div>`;
+h+=`<div class="grs">${["g1","g2","g3"].map(g=>gateBadge(c,g)).join("")}</div>`;
+h+=["g1","g2","g3"].map(g=>gatePanel(c,g)).join("");
+h+=`<div class="cc-out" style="color:${c.oc}">${I(c.oi,14)} ${c.out}</div></div>`;
+});
+document.getElementById("cgrid").innerHTML=h;
+rCDet();
+}
+
+function setPanel(p,open){
+const btn=document.querySelector(`button.gr[aria-controls="${p.id}"]`);
+if(btn)btn.setAttribute("aria-expanded",open?"true":"false");
+if(open){p.classList.add("open");p.style.maxHeight=p.scrollHeight+"px"}
+else{p.style.maxHeight=p.scrollHeight+"px";p.offsetHeight;p.classList.remove("open");p.style.maxHeight="0px"}
+}
+function tgGate(ev,cid,g){
+ev.stopPropagation();
+const p=document.getElementById(`gp-${cid}-${g}`);if(!p)return;
+const willOpen=!p.classList.contains("open");
+p.parentElement.querySelectorAll(".gp.open").forEach(o=>{if(o!==p)setPanel(o,false)});
+setPanel(p,willOpen);
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".gp.open").forEach(p=>setPanel(p,false))});
+window.addEventListener("resize",()=>document.querySelectorAll(".gp.open").forEach(p=>p.style.maxHeight=p.scrollHeight+"px"));
+
+function selC(id){cCase=cCase===id?null:id;document.querySelectorAll(".cc").forEach(e=>e.classList.toggle("on",e.dataset.id===cCase));rCDet()}
+
+function rCDet(){
+const el=document.getElementById("cdet");if(!cCase){el.innerHTML="";return}
+const c=CASES.find(x=>x.id===cCase);
+el.innerHTML=`<div class="cd-box"><div style="display:flex;align-items:center;gap:11px;margin-bottom:11px"><div class="cc-ic" style="background:${c.bg};color:${c.cl};width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center">${I(c.ic,21)}</div><div><h3>${c.nm} (${c.yr})</h3><p style="font-size:12px;color:var(--tx3);margin-top:1px">${I("pin",12)} ${c.jur} &middot; ${c.ty}</p></div></div><p style="font-size:13.5px;color:var(--tx2);line-height:1.75">${c.det}</p></div>`;
+}
+
+function rJur(){
+if(!DATA_OK)return;
+let h=`<thead><tr><th>${I("world",13)} Jurisdiction</th><th>${I("file",13)} Disclosure (G1)</th><th>${I("target",13)} Reliability (G2)</th><th>${I("link",13)} Provenance (G3)</th></tr></thead><tbody>`;
+JURISDICTIONS.forEach(j=>{h+=`<tr><td><div class="jn">${I(j.ic,15)} ${j.nm}</div></td><td>${j.disc}</td><td>${j.rel}</td><td>${j.prov}</td></tr>`});
+h+="</tbody>";document.getElementById("jtbl").innerHTML=h;
+}
+
+const GC=[
+{gate:"Gate 1: Disclosure",ic:"file",cl:"var(--purple)",bg:"var(--purple-bg)",items:[
+{id:"g1a",ic:"id",l:"Model card provided",d:"Intended use, performance metrics, training data, limitations, version history"},
+{id:"g1b",ic:"db",l:"Datasheet for dataset",d:"Composition, collection process, preprocessing, recommended uses"},
+{id:"g1c",ic:"versions",l:"Tool version and build",d:"Specific software version, build number, configuration parameters"},
+{id:"g1d",ic:"cert",l:"Independent validation report",d:"Forensic-community peer review, not solely vendor-conducted"},
+{id:"g1e",ic:"code",l:"Source code access (protective order)",d:"Following Pickett–Miles trajectory, upon particularized need"}
+]},
+{gate:"Gate 2: Reliability as applied",ic:"target",cl:"var(--teal)",bg:"var(--teal-bg)",items:[
+{id:"g2a",ic:"chart",l:"Input within validated domain",d:"Image resolution, file format, device type within validation scope"},
+{id:"g2b",ic:"chart",l:"Domain-specific error rate",d:"Known error rate for this specific domain and task"},
+{id:"g2c",ic:"repeat",l:"Version-specific validation",d:"Results for the exact software version used"},
+{id:"g2d",ic:"bulb",l:"Explainability output",d:"Feature attributions, confidence intervals, or XAI artifacts"}
+]},
+{gate:"Gate 3: Provenance",ic:"link",cl:"var(--blue)",bg:"var(--blue-bg)",items:[
+{id:"g3a",ic:"sitemap",l:"CASE/UCO provenance record",d:"Processing step log with tool identity, hashes, timestamps"},
+{id:"g3b",ic:"lock",l:"Cryptographic integrity",d:"Hash verification at each pipeline stage"},
+{id:"g3c",ic:"settings",l:"Non-deterministic parameters",d:"Seeds, temperature, model weight hashes for stochastic tools"},
+{id:"g3d",ic:"repeat",l:"Reproducibility pathway",d:"Documentation for independent reproduction of analysis"}
+]}
+];
+
+function rAssess(){
+let h=`<div class="fg"><label>${I("cpu",15)} AI tool being evaluated</label><input type="text" id="tn" placeholder="e.g., Cellebrite UFED 4PC v7.68, Topaz Video AI v4.1"></div>`;
+h+=`<div class="fg"><label>${I("world",15)} Jurisdiction</label><select id="jur"><option>US Federal (Daubert)</option><option>US State (Frye)</option><option>European Union</option><option>United Kingdom</option><option>India</option><option>Canada</option><option>Other</option></select></div>`;
+h+=`<div class="fg"><label>${I("git",15)} Function classification</label><select id="fc" onchange="uAC()"><option value="e">Extractive (copy, parse, display only)</option><option value="i">Interpretive (classifies, infers, enhances, generates)</option></select></div>`;
+h+=`<div id="gcl"></div>`;
+h+=`<div style="margin-top:22px"><button class="btn btn-p" onclick="evA()">${I("checks",16)} Evaluate evidence</button></div>`;
+h+=`<div id="ares"></div>`;
+document.getElementById("aform").innerHTML=h;uAC();
+}
+
+function uAC(){
+const fc=document.getElementById("fc");if(!fc)return;
+const el=document.getElementById("gcl");
+if(fc.value==="e"){el.innerHTML=`<div style="padding:18px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:var(--r);margin-top:14px;display:flex;gap:10px;align-items:flex-start">${I("check-c",22)} <div><p style="font-size:13.5px;font-weight:600;color:var(--green)">Extractive function → Traditional admission</p><p style="font-size:12.5px;color:var(--tx2);margin-top:3px">Three-gate pipeline not required. Verify source correspondence.</p></div></div>`;return}
+let h="";
+GC.forEach(gate=>{
+const ck=gate.items.filter(item=>document.getElementById(item.id)?.checked).length;
+h+=`<div class="gs" style="border-left:4px solid ${gate.cl};margin-top:18px">`;
+h+=`<div class="gs-h"><div class="gs-ic" style="background:${gate.bg};color:${gate.cl}">${I(gate.ic,17)}</div><div><div class="gs-t">${gate.gate}</div><div class="gs-s">${gate.items.length} requirements</div></div><div class="gs-p" style="background:${ck===gate.items.length?"var(--green-bg)":"var(--surface-alt)"};color:${ck===gate.items.length?"var(--green)":"var(--tx3)"}">${ck}/${gate.items.length}</div></div>`;
+h+=`<ul class="cl">`;
+gate.items.forEach(item=>{const was=document.getElementById(item.id)?.checked;h+=`<li><input type="checkbox" id="${item.id}"${was?" checked":""} onchange="uAC()"><div><div class="cl-l">${I(item.ic,14)} ${item.l}</div><div class="cl-d">${item.d}</div></div></li>`});
+h+=`</ul></div>`;
+});
+el.innerHTML=h;
+}
+
+function evA(){
+const fc=document.getElementById("fc");
+if(fc?.value==="e"){document.getElementById("ares").innerHTML=`<div class="ar ok"><h3>${I("check-c",22)} Traditional admission</h3><p>Extractive tool — three-gate scrutiny not required.</p></div>`;return}
+const tool=document.getElementById("tn")?.value||"[Tool not specified]";
+const jur=document.getElementById("jur")?.value||"";
+let g1=0,g1t=0,g2=0,g2t=0,g3=0,g3t=0;
+GC.forEach(g=>{g.items.forEach(item=>{const cb=document.getElementById(item.id);if(g.gate.includes("1")){g1t++;if(cb?.checked)g1++}if(g.gate.includes("2")){g2t++;if(cb?.checked)g2++}if(g.gate.includes("3")){g3t++;if(cb?.checked)g3++}})});
+const tot=g1+g2+g3,totT=g1t+g2t+g3t;let cls,title,ic,msg;
+if(tot===totT){cls="ok";title="All three gates satisfied";ic="check-c";msg=`<strong>${tool}</strong> passes the framework under ${jur}.<br><br><strong>Gate 1:</strong> ${g1}/${g1t} ✓ &nbsp; <strong>Gate 2:</strong> ${g2}/${g2t} ✓ &nbsp; <strong>Gate 3:</strong> ${g3}/${g3t} ✓`}
+else if(tot===0){cls="inc";title="Assessment incomplete";ic="clock";msg="No items checked. Work through each gate’s requirements above."}
+else{cls="bad";title="Requirements not fully met";ic="alert";const f=[];if(g1<g1t)f.push(`<strong>G1:</strong> ${g1}/${g1t}`);if(g2<g2t)f.push(`<strong>G2:</strong> ${g2}/${g2t}`);if(g3<g3t)f.push(`<strong>G3:</strong> ${g3}/${g3t}`);msg=`<strong>${tool}</strong> does not satisfy the framework under ${jur}.<br><br>Gaps: ${f.join(" &bull; ")}`}
+document.getElementById("ares").innerHTML=`<div class="ar ${cls}"><h3>${I(ic,22)} ${title}</h3><p>${msg}</p></div>`;
+}
+
+initTabs();rFlow();rInsp();loadData();
+</script>
+</body>
+</html>
