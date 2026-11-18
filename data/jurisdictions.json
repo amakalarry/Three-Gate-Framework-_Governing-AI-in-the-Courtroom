@@ -1,0 +1,53 @@
+{
+  "jurisdictions": [
+    {
+      "name": "US Federal",
+      "icon": "building",
+      "disclosure": "FRE 702 (2023): preponderance standard; FRE 707 withdrawn (2026); discovery under FRCP 16/26",
+      "reliability": "Daubert four-factor test; PCAST validity-as-applied distinction",
+      "provenance": "FRE 901(b)(9) authentication; no AI-specific provenance rule"
+    },
+    {
+      "name": "US States (Frye)",
+      "icon": "pin",
+      "disclosure": "Case-by-case discovery orders (Pickett, Arteaga, Miles); no uniform standard",
+      "reliability": "Frye general acceptance in relevant forensic community (Puloka)",
+      "provenance": "State authentication rules; no AI-specific requirements"
+    },
+    {
+      "name": "European Union",
+      "icon": "flag",
+      "disclosure": "AI Act Annex IV documentation; Art. 12 logging; Art. 13 transparency",
+      "reliability": "Arts. 9–15 high-risk requirements (risk mgmt., accuracy, robustness)",
+      "provenance": "LED Art. 11 automated processing limits; GDPR Art. 22"
+    },
+    {
+      "name": "United Kingdom",
+      "icon": "crown",
+      "disclosure": "Common-law presumption of computer reliability under review post-Horizon",
+      "reliability": "No AI-specific test; expert evidence governed by CrimPR Part 19",
+      "provenance": "Horizon Inquiry recommending rebuttable anti-presumption"
+    },
+    {
+      "name": "India",
+      "icon": "building",
+      "disclosure": "BSA 2023 s.63 two-part certificate with hash value",
+      "reliability": "Certificate proves integrity, not authenticity or correctness",
+      "provenance": "Hash-based, but deepfakes with valid hashes can satisfy"
+    },
+    {
+      "name": "Canada",
+      "icon": "leaf",
+      "disclosure": "Directive on Automated Decision-Making: Algorithmic Impact Assessment",
+      "reliability": "Four impact levels with scaled peer review and explanation",
+      "provenance": "Publication of AIAs required"
+    },
+    {
+      "name": "Council of Europe",
+      "icon": "world",
+      "disclosure": "Framework Convention on AI (CETS 225); CEPEJ Ethical Charter",
+      "reliability": "Transparency, oversight, accountability principles",
+      "provenance": "Budapest Convention Arts. 16–19 (procedural integrity)"
+    }
+  ]
+}
