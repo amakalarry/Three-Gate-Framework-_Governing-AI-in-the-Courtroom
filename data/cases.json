@@ -36,7 +36,7 @@
             {
               "requirement": "Validation report",
               "status": "not_met",
-              "why": "No validation by the forensic video community — forensic analysts did not recognise the technique."
+              "why": "No validation by the forensic video community - forensic analysts did not recognise the technique."
             },
             {
               "requirement": "Source code access",
@@ -61,7 +61,7 @@
             {
               "requirement": "Version-specific results",
               "status": "not_met",
-              "why": "No version-specific validation — and the tool added roughly 16× the original pixels with no measure of fidelity."
+              "why": "No version-specific validation - and the tool added roughly 16× the original pixels with no measure of fidelity."
             },
             {
               "requirement": "Explainability output",
@@ -214,7 +214,7 @@
             {
               "requirement": "Source code access",
               "status": "na",
-              "why": "Not sought — the order targeted system details, error rates, and the candidate list."
+              "why": "Not sought - the order targeted system details, error rates, and the candidate list."
             }
           ]
         },
@@ -290,7 +290,7 @@
             {
               "requirement": "Source code access",
               "status": "not_met",
-              "why": "Source-code order reversed absent a particularized showing of need — consistent with proportionality."
+              "why": "Source-code order reversed absent a particularized showing of need - consistent with proportionality."
             }
           ]
         },
@@ -461,7 +461,7 @@
             {
               "requirement": "Non-deterministic parameter logging",
               "status": "na",
-              "why": "Not applicable — physical extraction is deterministic."
+              "why": "Not applicable - physical extraction is deterministic."
             },
             {
               "requirement": "Reproducibility pathway",
@@ -528,7 +528,7 @@
             {
               "requirement": "Error-rate specification",
               "status": "not_examined",
-              "why": "No error rate required — the court only warned about possible racial disparities."
+              "why": "No error rate required - the court only warned about possible racial disparities."
             },
             {
               "requirement": "Version-specific results",
@@ -565,7 +565,7 @@
       "gates": {
         "g1": {
           "result": "na",
-          "note": "Not reached: no AI tool was offered — Tesla only speculated that the videos might be deepfakes."
+          "note": "Not reached: no AI tool was offered - Tesla only speculated that the videos might be deepfakes."
         },
         "g2": {
           "result": "na",
@@ -587,7 +587,7 @@
             {
               "requirement": "Non-deterministic parameter logging",
               "status": "na",
-              "why": "Not applicable — the recordings were not produced by a generative process."
+              "why": "Not applicable - the recordings were not produced by a generative process."
             },
             {
               "requirement": "Reproducibility pathway",
@@ -624,7 +624,7 @@
             {
               "requirement": "Datasheet for data",
               "status": "not_met",
-              "why": "No training-data information — the model’s involvement was itself undisclosed."
+              "why": "No training-data information - the model’s involvement was itself undisclosed."
             },
             {
               "requirement": "Tool identification",
@@ -639,7 +639,7 @@
             {
               "requirement": "Source code access",
               "status": "na",
-              "why": "Not at issue — the failure was undisclosed use, not a need to inspect the model."
+              "why": "Not at issue - the failure was undisclosed use, not a need to inspect the model."
             }
           ]
         },
@@ -670,7 +670,7 @@
         },
         "g3": {
           "result": "na",
-          "note": "Not applicable: the declaration was excluded at Gates 1–2, and no AI-generated artifact was offered as evidence."
+          "note": "Not applicable: the declaration was excluded at Gates 1-2, and no AI-generated artifact was offered as evidence."
         }
       }
     },
@@ -730,7 +730,7 @@
             {
               "requirement": "Error-rate specification",
               "status": "not_met",
-              "why": "No error rate — and the court’s own Copilot queries returned differing figures."
+              "why": "No error rate - and the court’s own Copilot queries returned differing figures."
             },
             {
               "requirement": "Version-specific results",
@@ -746,7 +746,7 @@
         },
         "g3": {
           "result": "na",
-          "note": "Not reached: the valuation was excluded at Gates 1–2, and no AI-generated exhibit was offered."
+          "note": "Not reached: the valuation was excluded at Gates 1-2, and no AI-generated exhibit was offered."
         }
       }
     },
@@ -763,7 +763,7 @@
         "icon": "check-c",
         "theme": "green"
       },
-      "summary": "Court refused to exclude expert who used an LLM to double-check findings. Demonstrates that responsible, verified AI use by experts survives scrutiny — the AI was a check, not the source of the opinion.",
+      "summary": "Court refused to exclude expert who used an LLM to double-check findings. Demonstrates that responsible, verified AI use by experts survives scrutiny - the AI was a check, not the source of the opinion.",
       "gates": {
         "g1": {
           "result": "pass",
@@ -786,7 +786,7 @@
             {
               "requirement": "Validation report",
               "status": "met",
-              "why": "AI served as a verification check — the conclusions came from the expert’s own methodology."
+              "why": "AI served as a verification check - the conclusions came from the expert’s own methodology."
             },
             {
               "requirement": "Source code access",
@@ -822,7 +822,7 @@
         },
         "g3": {
           "result": "na",
-          "note": "Not applicable: no AI-generated artifact was offered — the expert’s own opinion was the evidence."
+          "note": "Not applicable: no AI-generated artifact was offered - the expert’s own opinion was the evidence."
         }
       }
     },
@@ -867,7 +867,7 @@
             {
               "requirement": "Source code access",
               "status": "na",
-              "why": "Not sought — proportionality principles for e-discovery did not call for it."
+              "why": "Not sought - proportionality principles for e-discovery did not call for it."
             }
           ]
         },
@@ -1035,7 +1035,7 @@
             {
               "requirement": "Validation report",
               "status": "not_met",
-              "why": "No independent validation — reliance on vendor-funded studies."
+              "why": "No independent validation - reliance on vendor-funded studies."
             },
             {
               "requirement": "Source code access",
@@ -1080,7 +1080,7 @@
             {
               "requirement": "Cryptographic integrity",
               "status": "not_met",
-              "why": "No integrity checks — the altered classification replaced the original."
+              "why": "No integrity checks - the altered classification replaced the original."
             },
             {
               "requirement": "Non-deterministic parameter logging",
@@ -1132,7 +1132,7 @@
             {
               "requirement": "Validation report",
               "status": "not_examined",
-              "why": "No validation — the match was treated as an identification."
+              "why": "No validation - the match was treated as an identification."
             },
             {
               "requirement": "Source code access",

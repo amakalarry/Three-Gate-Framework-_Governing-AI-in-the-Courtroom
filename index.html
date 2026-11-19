@@ -371,12 +371,11 @@ footer{padding:36px 0;border-top:1px solid var(--border-lt);background:var(--sur
 <a href="#sec-jr" onclick="go('jr');return false"><svg class="icon"><use href="#i-world"/></svg><span>Jurisdictions</span></a>
 <a href="#sec-as" onclick="go('as');return false"><svg class="icon"><use href="#i-clipboard"/></svg><span>Assessment</span></a>
 </nav>
-<div class="hbadges"><span class="hb">Femi-Adeyinka &amp; Varol</span><span class="hb">ISDFS 2027</span></div>
 </div></header>
 
 <div class="container">
 <div class="hero"><div class="hero-g"><div>
-<div class="eyebrow">Interactive companion · ISDFS 2027</div>
+<div class="eyebrow">Interactive companion</div>
 <h1>Judicial oversight of <em>AI-generated</em> digital evidence</h1>
 <p class="lede">A working companion to “Governing AI in the Courtroom.” Follow an AI-derived exhibit through disclosure, reliability, and provenance review, test the framework against <span data-count="cases" data-fmt="lower">sixteen</span> decided cases, compare <span data-count="jurs" data-fmt="lower">seven</span> jurisdictions, and run an assessment of your own.</p>
 <div class="pipe" aria-label="The three gates, in order">
@@ -417,7 +416,7 @@ footer{padding:36px 0;border-top:1px solid var(--border-lt);background:var(--sur
 </div>
 
 <footer><div class="container"><div class="ft">
-<span>Companion to <em>Governing AI in the Courtroom</em> · Femi-Adeyinka &amp; Varol · ISDFS 2027</span>
+<span>Companion to <em>Governing AI in the Courtroom</em></span>
 <span>Sam Houston State University</span>
 </div></div></footer>
 
@@ -428,9 +427,9 @@ const NODES=[
 {id:"entry",t:"AI forensic evidence submitted",s:"Any AI-generated or AI-transformed exhibit offered into record",idx:"00",tr:"shared",g:null,sum:"The entry point for any exhibit generated or transformed by an AI system.",rule:"Before evidentiary weight is assessed, the artifact enters functional triage to determine whether the model retrieved existing facts or synthesized new inferences.",cr:[{sym:"①",l:"Artifact capture",d:"Preserves raw model outputs, prompts, parameters, and exhibit files at intake.",tg:[]},{sym:"②",l:"Procedural posture",d:"Identifies the offering party, intended factual proposition, and scope of reliance.",tg:[]}]},
 {id:"classify",t:"Function classification",s:"Does the tool classify, infer, enhance, or generate?",idx:"PRE",tr:"shared",g:null,sum:"Separates extractive retrieval from interpretive processing. This distinction determines the scrutiny pathway.",rule:"Systems that strictly locate or format existing source material proceed under traditional rules. Systems that infer, score, reconstruct, or generate trigger the three-gate pipeline.",cr:[{sym:"E",l:"Extractive threshold",d:"Output directly verifiable against an unchanged source without probabilistic inference.",tg:[]},{sym:"I",l:"Interpretive threshold",d:"Output introduces judgment, classification, synthesis, prediction, or probabilistic scoring.",tg:[]}]},
 {id:"extractive",t:"Extractive → Traditional admission",s:"Standard authentication under FRE 901/902",idx:"T",tr:"extractive",g:null,sum:"Tools that index, transcribe, parse, or surface existing records without altering underlying meaning.",rule:"A sponsoring witness or foundational affidavit showing accurate retrieval and intact source correspondence satisfies admission.",cr:[{sym:"①",l:"Source correspondence",d:"Every extracted span maps one-to-one to a verifiable location in the primary record.",tg:["fre"]},{sym:"②",l:"Direct inspection",d:"Opposing counsel can cross-check the extracted item against the raw source.",tg:["fre"]}]},
-{id:"disclosure",t:"Gate 1 — Disclosure",s:"Model card · Datasheet · Tool version · Validation · Source code",idx:"G1",tr:"interpretive",g:"g1",sum:"Minimum information required before AI-derived evidence may be considered. Maps to Daubert peer review, Frye acceptance, FRE 702 basis.",rule:"Gate 1 clears when model identity, configuration, training data boundaries, validation results, and legal notice obligations are formally documented and disclosed.",cr:[{sym:"①",l:"Model card",d:"Intended use, performance metrics by subgroup, training data characteristics, limitations, version history.",tg:["daubert","nist"]},{sym:"②",l:"Datasheet for data",d:"Composition, collection process, preprocessing, recommended uses for training/validation data.",tg:["daubert","nist"]},{sym:"③",l:"Tool identification",d:"Specific software version, build number, configuration parameters used in this case.",tg:["fre"]},{sym:"④",l:"Validation report",d:"Independent forensic-community validation, not solely vendor-conducted studies.",tg:["daubert","frye"]},{sym:"⑤",l:"Source code access",d:"Under protective order upon particularized need (Pickett–Miles trajectory).",tg:["fre","frye"]}]},
-{id:"reliability",t:"Gate 2 — Reliability as applied",s:"Domain validation · Error rate · Version results · XAI",idx:"G2",tr:"interpretive",g:"g2",sum:"Case-specific reliability per FRE 702 (2023) “reliable application” amendment. PCAST foundational vs. applied validity.",rule:"Proponent must show input within validated domain, known error rate for the specific domain/task, and version-specific validation.",cr:[{sym:"①",l:"Domain validation",d:"Input falls within the validated domain (image resolution, file format, device type).",tg:["daubert","nist"]},{sym:"②",l:"Error-rate specification",d:"Known error rate for specific input domain. Single global rate insufficient for data-dependent models.",tg:["daubert"]},{sym:"③",l:"Version-specific results",d:"Validation for the exact software version used, not a different version.",tg:["fre","nist"]},{sym:"④",l:"Explainability output",d:"XAI artifacts: feature attributions, confidence intervals, attention maps.",tg:["nist","eu"]}]},
-{id:"provenance",t:"Gate 3 — Provenance",s:"CASE/UCO record · Hash chain · Params · Reproducibility",idx:"G3",tr:"interpretive",g:"g3",sum:"Computational chain of custody — unbroken, machine-readable record of each AI pipeline transformation. CASE/UCO backbone.",rule:"Ensures artifact not altered, cherry-picked, or corrupted across storage, transformation, or model updates.",cr:[{sym:"①",l:"Provenance record",d:"CASE-compliant log: tool identity, version, input/output hashes, timestamps, W3C PROV-O aligned.",tg:["caseuco","fre"]},{sym:"②",l:"Cryptographic integrity",d:"Hash verification at each pipeline stage to detect unauthorized modification.",tg:["caseuco"]},{sym:"③",l:"Non-deterministic parameter logging",d:"Seeds, temperature, model weight hashes for stochastic tools.",tg:["nist"]},{sym:"④",l:"Reproducibility pathway",d:"Sufficient documentation for independent examiner to reproduce the analysis.",tg:["daubert","nist"]}]},
+{id:"disclosure",t:"Gate 1 - Disclosure",s:"Model card · Datasheet · Tool version · Validation · Source code",idx:"G1",tr:"interpretive",g:"g1",sum:"Minimum information required before AI-derived evidence may be considered. Maps to Daubert peer review, Frye acceptance, FRE 702 basis.",rule:"Gate 1 clears when model identity, configuration, training data boundaries, validation results, and legal notice obligations are formally documented and disclosed.",cr:[{sym:"①",l:"Model card",d:"Intended use, performance metrics by subgroup, training data characteristics, limitations, version history.",tg:["daubert","nist"]},{sym:"②",l:"Datasheet for data",d:"Composition, collection process, preprocessing, recommended uses for training/validation data.",tg:["daubert","nist"]},{sym:"③",l:"Tool identification",d:"Specific software version, build number, configuration parameters used in this case.",tg:["fre"]},{sym:"④",l:"Validation report",d:"Independent forensic-community validation, not solely vendor-conducted studies.",tg:["daubert","frye"]},{sym:"⑤",l:"Source code access",d:"Under protective order upon particularized need (Pickett-Miles trajectory).",tg:["fre","frye"]}]},
+{id:"reliability",t:"Gate 2 - Reliability as applied",s:"Domain validation · Error rate · Version results · XAI",idx:"G2",tr:"interpretive",g:"g2",sum:"Case-specific reliability per FRE 702 (2023) “reliable application” amendment. PCAST foundational vs. applied validity.",rule:"Proponent must show input within validated domain, known error rate for the specific domain/task, and version-specific validation.",cr:[{sym:"①",l:"Domain validation",d:"Input falls within the validated domain (image resolution, file format, device type).",tg:["daubert","nist"]},{sym:"②",l:"Error-rate specification",d:"Known error rate for specific input domain. Single global rate insufficient for data-dependent models.",tg:["daubert"]},{sym:"③",l:"Version-specific results",d:"Validation for the exact software version used, not a different version.",tg:["fre","nist"]},{sym:"④",l:"Explainability output",d:"XAI artifacts: feature attributions, confidence intervals, attention maps.",tg:["nist","eu"]}]},
+{id:"provenance",t:"Gate 3 - Provenance",s:"CASE/UCO record · Hash chain · Params · Reproducibility",idx:"G3",tr:"interpretive",g:"g3",sum:"Computational chain of custody - unbroken, machine-readable record of each AI pipeline transformation. CASE/UCO backbone.",rule:"Ensures artifact not altered, cherry-picked, or corrupted across storage, transformation, or model updates.",cr:[{sym:"①",l:"Provenance record",d:"CASE-compliant log: tool identity, version, input/output hashes, timestamps, W3C PROV-O aligned.",tg:["caseuco","fre"]},{sym:"②",l:"Cryptographic integrity",d:"Hash verification at each pipeline stage to detect unauthorized modification.",tg:["caseuco"]},{sym:"③",l:"Non-deterministic parameter logging",d:"Seeds, temperature, model weight hashes for stochastic tools.",tg:["nist"]},{sym:"④",l:"Reproducibility pathway",d:"Sufficient documentation for independent examiner to reproduce the analysis.",tg:["daubert","nist"]}]},
 {id:"admissible",t:"Evidence admissible",s:"Subject to weight determination by trier of fact",idx:"✓",tr:"interpretive",g:null,sum:"All three gates satisfied. Weight and credibility remain subject to cross-examination.",rule:"Admissibility permits consideration by the trier of fact. Limitations and error bounds travel alongside the exhibit.",cr:[{sym:"✓",l:"Threshold clearance",d:"All three gates passed with documented foundation.",tg:[]},{sym:"⚖",l:"Fact-finder evaluation",d:"Limitations and error bounds inform weight determination.",tg:["fre"]}]}
 ];
 
@@ -455,7 +454,7 @@ JURISDICTIONS=j.jurisdictions.map(x=>({nm:x.name,ic:x.icon,disc:x.disclosure,rel
 DATA_OK=true;
 }catch(err){
 console.error(err);
-const msg=`<div class="load-err">${I("alert",18)}<div><b>Couldn’t load the case data.</b> Browsers block <code>data/*.json</code> when this page is opened straight from disk. Serve the folder instead — run <code>python3 -m http.server</code> in it and open <code>http://localhost:8000</code> — or view the GitHub Pages site.</div></div>`;
+const msg=`<div class="load-err">${I("alert",18)}<div><b>Couldn’t load the case data.</b> Browsers block <code>data/*.json</code> when this page is opened straight from disk. Serve the folder instead - run <code>python3 -m http.server</code> in it and open <code>http://localhost:8000</code> - or view the GitHub Pages site.</div></div>`;
 document.getElementById("cgrid").innerHTML=msg;document.getElementById("jtbl").outerHTML=`<div id="jtbl">${msg}</div>`;
 return;
 }
@@ -608,11 +607,11 @@ document.getElementById("insp").innerHTML=h;
 }
 
 const GR_IC={fail:I("x",12),pass:I("check",12),partial:I("tilde",12),na:I("minus",12),none:I("circle",12)};
-const GR_LB={fail:"✗ Fail",pass:"✓ Pass",partial:"~ Partial",na:"N/A",none:"— None"};
+const GR_LB={fail:"✗ Fail",pass:"✓ Pass",partial:"~ Partial",na:"N/A",none:"- None"};
 
 function gateBadge(c,g){
 const s=c[g];
-return `<button type="button" class="gr ${s}" data-g="${g}" aria-expanded="false" aria-controls="gp-${c.id}-${g}" onclick="tgGate(event,'${c.id}','${g}')" title="Show ${GDEF[g].nm} breakdown">${GR_IC[s]} ${g.toUpperCase()}: ${GR_LB[s].replace(/^[✗✓~—]\s*/,"")}${I("chev",11).replace('class="icon"','class="icon chev"')}</button>`;
+return `<button type="button" class="gr ${s}" data-g="${g}" aria-expanded="false" aria-controls="gp-${c.id}-${g}" onclick="tgGate(event,'${c.id}','${g}')" title="Show ${GDEF[g].nm} breakdown">${GR_IC[s]} ${g.toUpperCase()}: ${GR_LB[s].replace(/^[✗✓~-]\s*/,"")}${I("chev",11).replace('class="icon"','class="icon chev"')}</button>`;
 }
 function gatePanel(c,g){
 const a=(GA[c.id]||{})[g]||{note:"No requirement-level analysis recorded for this gate."};
@@ -680,7 +679,7 @@ const GC=[
 {id:"g1b",ic:"db",l:"Datasheet for dataset",d:"Composition, collection process, preprocessing, recommended uses"},
 {id:"g1c",ic:"versions",l:"Tool version and build",d:"Specific software version, build number, configuration parameters"},
 {id:"g1d",ic:"cert",l:"Independent validation report",d:"Forensic-community peer review, not solely vendor-conducted"},
-{id:"g1e",ic:"code",l:"Source code access (protective order)",d:"Following Pickett–Miles trajectory, upon particularized need"}
+{id:"g1e",ic:"code",l:"Source code access (protective order)",d:"Following Pickett-Miles trajectory, upon particularized need"}
 ]},
 {gate:"Gate 2: Reliability as applied",ic:"target",cl:"var(--teal)",bg:"var(--teal-bg)",items:[
 {id:"g2a",ic:"chart",l:"Input within validated domain",d:"Image resolution, file format, device type within validation scope"},
@@ -724,7 +723,7 @@ el.innerHTML=h;
 
 function evA(){
 const fc=document.getElementById("fc");
-if(fc?.value==="e"){document.getElementById("ares").innerHTML=`<div class="ar ok"><h3>${I("check-c",22)} Traditional admission</h3><p>Extractive tool — three-gate scrutiny not required.</p></div>`;return}
+if(fc?.value==="e"){document.getElementById("ares").innerHTML=`<div class="ar ok"><h3>${I("check-c",22)} Traditional admission</h3><p>Extractive tool - three-gate scrutiny not required.</p></div>`;return}
 const tool=document.getElementById("tn")?.value||"[Tool not specified]";
 const jur=document.getElementById("jur")?.value||"";
 let g1=0,g1t=0,g2=0,g2t=0,g3=0,g3t=0;
