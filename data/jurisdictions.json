@@ -18,7 +18,7 @@
       "name": "European Union",
       "icon": "flag",
       "disclosure": "AI Act Annex IV documentation; Art. 12 logging; Art. 13 transparency",
-      "reliability": "Arts. 9–15 high-risk requirements (risk mgmt., accuracy, robustness)",
+      "reliability": "Arts. 9-15 high-risk requirements (risk mgmt., accuracy, robustness)",
       "provenance": "LED Art. 11 automated processing limits; GDPR Art. 22"
     },
     {
@@ -47,7 +47,7 @@
       "icon": "world",
       "disclosure": "Framework Convention on AI (CETS 225); CEPEJ Ethical Charter",
       "reliability": "Transparency, oversight, accountability principles",
-      "provenance": "Budapest Convention Arts. 16–19 (procedural integrity)"
+      "provenance": "Budapest Convention Arts. 16-19 (procedural integrity)"
     }
   ]
 }

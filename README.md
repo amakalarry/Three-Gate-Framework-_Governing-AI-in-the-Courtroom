@@ -1,6 +1,6 @@
 # Three-Gate Framework: Governing AI in the Courtroom
 
-An interactive companion to **“Governing AI in the Courtroom”** (Femi-Adeyinka & Varol, ISDFS 2027), a framework for deciding when AI-generated or AI-transformed digital evidence should be admitted in court.
+An interactive companion to **“Governing AI in the Courtroom”**, a framework for deciding when AI-generated or AI-transformed digital evidence should be admitted in court.
 
 The framework first asks whether a tool is **extractive** (it only locates, copies, or formats existing records) or **interpretive** (it classifies, infers, enhances, or generates). Extractive output proceeds under ordinary authentication rules. Interpretive output must clear three gates, and the proponent bears the burden at each one:
 
@@ -81,4 +81,4 @@ Gate analyses for *Puloka*, *Kohls v. Ellison*, *Schulte v. LinkedIn*, *ShotSpot
 
 ## Citation
 
-Femi-Adeyinka & Varol, “Governing AI in the Courtroom,” *ISDFS 2027*. Sam Houston State University.
+Citation details will be added once the paper’s publication venue is confirmed.
